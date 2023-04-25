@@ -122,8 +122,21 @@ pip3 install --pre torch torchvision torchaudio --index-url https://download.pyt
 https://towardsdatascience.com/installing-pytorch-on-apple-m1-chip-with-gpu-acceleration-3351dc44d67c
 ```
 $ conda create -n torch-gpu python=3.8
+$ conda inactivate
 $ conda activate torch-gpu
 $ conda install pytorch torchvision torchaudio -c pytorch-nightly
+```
+
+```
+$ conda info --envs
+# conda environments:
+#
+base                     /Users/gavinxiang/miniconda3
+torch-gpu                /Users/gavinxiang/miniconda3/envs/torch-gpu
+                         /Users/gavinxiang/miniforge3/envs/test
+                         /usr/local/Caskroom/miniforge/base
+                         /usr/local/Caskroom/miniforge/base/envs/mlp
+                         /usr/local/Caskroom/miniforge/base/envs/tf
 ```
 
 https://github.com/chaofengc/IQA-PyTorch
