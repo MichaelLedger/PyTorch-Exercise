@@ -1,2 +1,2 @@
 # PyTorch-Exercise
-Collections of PyTorch exercises for personal learning mainly for M1 Mac with OS X arm64 (Apple Silicon).
+Collections of PyTorch exercises for personal learning mainly for M1 Max Mac Studio with OS X arm64 (Apple Silicon) for MUSIQ(Multi-scale Image Quality Transformer).
