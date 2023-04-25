@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6749091729EE290800FC7DE5 /* StyleTransferer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749091629EE290800FC7DE5 /* StyleTransferer.swift */; };
+		6749091929EE62C000FC7DE5 /* MUSIQTaskVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749091829EE62C000FC7DE5 /* MUSIQTaskVision.swift */; };
+		6749098829EE765A00FC7DE5 /* TFLMUSIQTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6749098229EE765A00FC7DE5 /* TFLMUSIQTransformer.m */; };
+		6749099529EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6749099229EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.m */; };
+		6749099B29EE7D5800FC7DE5 /* TFLMUSIQResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6749099A29EE7D5800FC7DE5 /* TFLMUSIQResult.m */; };
+		6749099F29EFD11D00FC7DE5 /* nima.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 6749099E29EFD11D00FC7DE5 /* nima.tflite */; };
+		676B8FEF29E95F5A006D24A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8FEE29E95F5A006D24A4 /* AppDelegate.swift */; };
+		676B8FF129E95F5A006D24A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8FF029E95F5A006D24A4 /* SceneDelegate.swift */; };
+		676B8FF329E95F5A006D24A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B8FF229E95F5A006D24A4 /* ViewController.swift */; };
+		676B8FF629E95F5A006D24A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 676B8FF429E95F5A006D24A4 /* Main.storyboard */; };
+		676B8FF829E95F5B006D24A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 676B8FF729E95F5B006D24A4 /* Assets.xcassets */; };
+		676B8FFB29E95F5B006D24A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 676B8FF929E95F5B006D24A4 /* LaunchScreen.storyboard */; };
+		676B900429E95FA9006D24A4 /* MUSIQTransferer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B900329E95FA9006D24A4 /* MUSIQTransferer.swift */; };
+		676B900729E9658E006D24A4 /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B900529E9658E006D24A4 /* TFLiteExtension.swift */; };
+		676B900829E9658E006D24A4 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B900629E9658E006D24A4 /* UIKitExtension.swift */; };
+		676B900A29E96615006D24A4 /* StylePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676B900929E96615006D24A4 /* StylePickerViewController.swift */; };
+		793B8A8547D06EA80A2100D9 /* Pods_MUSIQ_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8836743E999293216357C7F5 /* Pods_MUSIQ_Demo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		508BB321A5A518E856EAB3E3 /* Pods-MUSIQ-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MUSIQ-Demo.release.xcconfig"; path = "Target Support Files/Pods-MUSIQ-Demo/Pods-MUSIQ-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		5EE9EB304E023EEE0F28D9DD /* Pods-MUSIQ-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MUSIQ-Demo.debug.xcconfig"; path = "Target Support Files/Pods-MUSIQ-Demo/Pods-MUSIQ-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		6749091629EE290800FC7DE5 /* StyleTransferer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleTransferer.swift; sourceTree = "<group>"; };
+		6749091829EE62C000FC7DE5 /* MUSIQTaskVision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSIQTaskVision.swift; sourceTree = "<group>"; };
+		6749098229EE765A00FC7DE5 /* TFLMUSIQTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLMUSIQTransformer.m; sourceTree = "<group>"; };
+		6749098329EE765A00FC7DE5 /* musiq_options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = musiq_options.h; sourceTree = "<group>"; };
+		6749098429EE765A00FC7DE5 /* base_options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_options.h; sourceTree = "<group>"; };
+		6749098529EE765A00FC7DE5 /* musiq_result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = musiq_result.h; sourceTree = "<group>"; };
+		6749098629EE765A00FC7DE5 /* musiq_transformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = musiq_transformer.h; sourceTree = "<group>"; };
+		6749098729EE765A00FC7DE5 /* TFLMUSIQTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLMUSIQTransformer.h; sourceTree = "<group>"; };
+		6749098929EE772900FC7DE5 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		6749098A29EE776500FC7DE5 /* frame_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frame_buffer.h; sourceTree = "<group>"; };
+		6749098B29EE778F00FC7DE5 /* bounding_box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bounding_box.h; sourceTree = "<group>"; };
+		6749098C29EE790E00FC7DE5 /* TFLCommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLCommonUtils.m; sourceTree = "<group>"; };
+		6749098D29EE790E00FC7DE5 /* TFLCommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommonUtils.h; sourceTree = "<group>"; };
+		6749098F29EE796200FC7DE5 /* TFLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLCommon.h; sourceTree = "<group>"; };
+		6749099129EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFLBaseOptions+Helpers.h"; sourceTree = "<group>"; };
+		6749099229EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFLBaseOptions+Helpers.m"; sourceTree = "<group>"; };
+		6749099629EE7C5F00FC7DE5 /* GMLImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMLImage+Utils.h"; sourceTree = "<group>"; };
+		6749099729EE7C5F00FC7DE5 /* GMLImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GMLImage+Utils.m"; sourceTree = "<group>"; };
+		6749099929EE7D5800FC7DE5 /* TFLMUSIQResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFLMUSIQResult.h; sourceTree = "<group>"; };
+		6749099A29EE7D5800FC7DE5 /* TFLMUSIQResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFLMUSIQResult.m; sourceTree = "<group>"; };
+		6749099E29EFD11D00FC7DE5 /* nima.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = nima.tflite; sourceTree = "<group>"; };
+		676B8FEB29E95F5A006D24A4 /* MUSIQ-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MUSIQ-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		676B8FEE29E95F5A006D24A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		676B8FF029E95F5A006D24A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		676B8FF229E95F5A006D24A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		676B8FF529E95F5A006D24A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		676B8FF729E95F5B006D24A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		676B8FFA29E95F5B006D24A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		676B8FFC29E95F5B006D24A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		676B900329E95FA9006D24A4 /* MUSIQTransferer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSIQTransferer.swift; sourceTree = "<group>"; };
+		676B900529E9658E006D24A4 /* TFLiteExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
+		676B900629E9658E006D24A4 /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		676B900929E96615006D24A4 /* StylePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylePickerViewController.swift; sourceTree = "<group>"; };
+		8836743E999293216357C7F5 /* Pods_MUSIQ_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MUSIQ_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		676B8FE829E95F5A006D24A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				793B8A8547D06EA80A2100D9 /* Pods_MUSIQ_Demo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		53C5EB27D8A44730A589C9CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8836743E999293216357C7F5 /* Pods_MUSIQ_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6749098129EE765A00FC7DE5 /* custom */ = {
+			isa = PBXGroup;
+			children = (
+				6749099629EE7C5F00FC7DE5 /* GMLImage+Utils.h */,
+				6749099729EE7C5F00FC7DE5 /* GMLImage+Utils.m */,
+				6749099129EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.h */,
+				6749099229EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.m */,
+				6749098F29EE796200FC7DE5 /* TFLCommon.h */,
+				6749098D29EE790E00FC7DE5 /* TFLCommonUtils.h */,
+				6749098C29EE790E00FC7DE5 /* TFLCommonUtils.m */,
+				6749098B29EE778F00FC7DE5 /* bounding_box.h */,
+				6749098A29EE776500FC7DE5 /* frame_buffer.h */,
+				6749098929EE772900FC7DE5 /* common.h */,
+				6749098729EE765A00FC7DE5 /* TFLMUSIQTransformer.h */,
+				6749098229EE765A00FC7DE5 /* TFLMUSIQTransformer.m */,
+				6749098329EE765A00FC7DE5 /* musiq_options.h */,
+				6749098429EE765A00FC7DE5 /* base_options.h */,
+				6749098529EE765A00FC7DE5 /* musiq_result.h */,
+				6749098629EE765A00FC7DE5 /* musiq_transformer.h */,
+				6749099929EE7D5800FC7DE5 /* TFLMUSIQResult.h */,
+				6749099A29EE7D5800FC7DE5 /* TFLMUSIQResult.m */,
+			);
+			path = custom;
+			sourceTree = SOURCE_ROOT;
+		};
+		676B8FE229E95F5A006D24A4 = {
+			isa = PBXGroup;
+			children = (
+				676B8FED29E95F5A006D24A4 /* MUSIQ-Demo */,
+				676B8FEC29E95F5A006D24A4 /* Products */,
+				D09922530357D4C81BB3372D /* Pods */,
+				53C5EB27D8A44730A589C9CE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		676B8FEC29E95F5A006D24A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				676B8FEB29E95F5A006D24A4 /* MUSIQ-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		676B8FED29E95F5A006D24A4 /* MUSIQ-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				676B900229E95F92006D24A4 /* TFLite */,
+				676B8FEE29E95F5A006D24A4 /* AppDelegate.swift */,
+				676B8FF029E95F5A006D24A4 /* SceneDelegate.swift */,
+				676B8FF229E95F5A006D24A4 /* ViewController.swift */,
+				676B8FF429E95F5A006D24A4 /* Main.storyboard */,
+				676B8FF729E95F5B006D24A4 /* Assets.xcassets */,
+				676B8FF929E95F5B006D24A4 /* LaunchScreen.storyboard */,
+				676B8FFC29E95F5B006D24A4 /* Info.plist */,
+			);
+			path = "MUSIQ-Demo";
+			sourceTree = "<group>";
+		};
+		676B900229E95F92006D24A4 /* TFLite */ = {
+			isa = PBXGroup;
+			children = (
+				6749098129EE765A00FC7DE5 /* custom */,
+				676B900929E96615006D24A4 /* StylePickerViewController.swift */,
+				676B900529E9658E006D24A4 /* TFLiteExtension.swift */,
+				676B900629E9658E006D24A4 /* UIKitExtension.swift */,
+				6749091629EE290800FC7DE5 /* StyleTransferer.swift */,
+				676B900329E95FA9006D24A4 /* MUSIQTransferer.swift */,
+				6749091829EE62C000FC7DE5 /* MUSIQTaskVision.swift */,
+				676B900B29E96638006D24A4 /* model */,
+			);
+			path = TFLite;
+			sourceTree = "<group>";
+		};
+		676B900B29E96638006D24A4 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6749099E29EFD11D00FC7DE5 /* nima.tflite */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		D09922530357D4C81BB3372D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5EE9EB304E023EEE0F28D9DD /* Pods-MUSIQ-Demo.debug.xcconfig */,
+				508BB321A5A518E856EAB3E3 /* Pods-MUSIQ-Demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		676B8FEA29E95F5A006D24A4 /* MUSIQ-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 676B8FFF29E95F5B006D24A4 /* Build configuration list for PBXNativeTarget "MUSIQ-Demo" */;
+			buildPhases = (
+				7943A8BC88C76573724C806B /* [CP] Check Pods Manifest.lock */,
+				676B8FE729E95F5A006D24A4 /* Sources */,
+				676B8FE829E95F5A006D24A4 /* Frameworks */,
+				676B8FE929E95F5A006D24A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MUSIQ-Demo";
+			productName = "MUSIQ-Demo";
+			productReference = 676B8FEB29E95F5A006D24A4 /* MUSIQ-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		676B8FE329E95F5A006D24A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					676B8FEA29E95F5A006D24A4 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
+				};
+			};
+			buildConfigurationList = 676B8FE629E95F5A006D24A4 /* Build configuration list for PBXProject "MUSIQ-Demo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 676B8FE229E95F5A006D24A4;
+			productRefGroup = 676B8FEC29E95F5A006D24A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				676B8FEA29E95F5A006D24A4 /* MUSIQ-Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		676B8FE929E95F5A006D24A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				676B8FFB29E95F5B006D24A4 /* LaunchScreen.storyboard in Resources */,
+				676B8FF829E95F5B006D24A4 /* Assets.xcassets in Resources */,
+				6749099F29EFD11D00FC7DE5 /* nima.tflite in Resources */,
+				676B8FF629E95F5A006D24A4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7943A8BC88C76573724C806B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MUSIQ-Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		676B8FE729E95F5A006D24A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				676B900829E9658E006D24A4 /* UIKitExtension.swift in Sources */,
+				676B8FF329E95F5A006D24A4 /* ViewController.swift in Sources */,
+				6749099529EE7AA400FC7DE5 /* TFLBaseOptions+Helpers.m in Sources */,
+				6749099B29EE7D5800FC7DE5 /* TFLMUSIQResult.m in Sources */,
+				676B8FEF29E95F5A006D24A4 /* AppDelegate.swift in Sources */,
+				676B900A29E96615006D24A4 /* StylePickerViewController.swift in Sources */,
+				676B900729E9658E006D24A4 /* TFLiteExtension.swift in Sources */,
+				6749091729EE290800FC7DE5 /* StyleTransferer.swift in Sources */,
+				676B8FF129E95F5A006D24A4 /* SceneDelegate.swift in Sources */,
+				676B900429E95FA9006D24A4 /* MUSIQTransferer.swift in Sources */,
+				6749098829EE765A00FC7DE5 /* TFLMUSIQTransformer.m in Sources */,
+				6749091929EE62C000FC7DE5 /* MUSIQTaskVision.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		676B8FF429E95F5A006D24A4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				676B8FF529E95F5A006D24A4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		676B8FF929E95F5B006D24A4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				676B8FFA29E95F5B006D24A4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		676B8FFD29E95F5B006D24A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		676B8FFE29E95F5B006D24A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		676B900029E95F5B006D24A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EE9EB304E023EEE0F28D9DD /* Pods-MUSIQ-Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4191812;
+				DEVELOPMENT_TEAM = VCZ4PA8KG3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MUSIQ-Demo/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = ScoreImage;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We try to add scaled image to your device.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"TensorFlowLite\"",
+					"-framework",
+					"\"TensorFlowLiteC\"",
+					"-framework",
+					"\"TensorFlowLiteCMetal\"",
+					"-framework",
+					"\"TensorFlowLiteSelectTfOps\"",
+					"-weak_framework",
+					"\"CoreML\"",
+					"-weak_framework",
+					"\"Metal\"",
+					"-force_load",
+					"$(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		676B900129E95F5B006D24A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 508BB321A5A518E856EAB3E3 /* Pods-MUSIQ-Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4191812;
+				DEVELOPMENT_TEAM = VCZ4PA8KG3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MUSIQ-Demo/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = ScoreImage;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We try to add scaled image to your device.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-framework",
+					"\"TensorFlowLite\"",
+					"-framework",
+					"\"TensorFlowLiteC\"",
+					"-framework",
+					"\"TensorFlowLiteCMetal\"",
+					"-framework",
+					"\"TensorFlowLiteSelectTfOps\"",
+					"-weak_framework",
+					"\"CoreML\"",
+					"-weak_framework",
+					"\"Metal\"",
+					"-force_load",
+					"$(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		676B8FE629E95F5A006D24A4 /* Build configuration list for PBXProject "MUSIQ-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				676B8FFD29E95F5B006D24A4 /* Debug */,
+				676B8FFE29E95F5B006D24A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		676B8FFF29E95F5B006D24A4 /* Build configuration list for PBXNativeTarget "MUSIQ-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				676B900029E95F5B006D24A4 /* Debug */,
+				676B900129E95F5B006D24A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 676B8FE329E95F5A006D24A4 /* Project object */;
+}

@@ -10,6 +10,14 @@
 *.pt
 *.onnx
 
+# TensorFlow Lite model
+*.tflite
+*.pb
+*.npz
+
+# Miniforge
+Mambaforge-Darwin-arm64.sh
+
 ## Build generated
 build/
 DerivedData
