@@ -1,3 +1,51 @@
+## macOS
+.DS_Store
+
+## Dataset
+512x384/
+1024x768/
+
+## PyTorch
+*.pth
+*.pt
+*.onnx
+
+## Build generated
+build/
+DerivedData
+build.xcarchive
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.xcworkspacedata
+IDEWorkspaceChecks.plist
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Checkouts
+Carthage/Build
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
