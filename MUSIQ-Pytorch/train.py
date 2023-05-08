@@ -50,8 +50,8 @@ config = Config({
     'momentum': 0.9,                        # SGD momentum
     'T_max': 3e4,                           # period (iteration) of cosine learning rate decay
     'eta_min': 0,                           # minimum learning rate
-    'save_freq': 10,                        # save checkpoint frequency (epoch)
-    'val_freq': 5,                          # validation frequency (epoch)
+    'save_freq': 1,                        # save checkpoint frequency (epoch)
+    'val_freq': 1,                          # validation frequency (epoch)
 
 
     # load & save checkpoint

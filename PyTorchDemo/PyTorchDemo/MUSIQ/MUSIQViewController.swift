@@ -30,6 +30,8 @@ class MUSIQViewController: UIViewController {
 //    private var gpuStyleTransferer: StyleTransferer?
 //    private var gpuMUSIQTransferer: MUSIQTransferer?
     
+    private var predictor = MUSIQPredictor()
+    
     /// Target image to transfer a style onto.
     private var targetImage: UIImage?
     
@@ -143,7 +145,8 @@ class MUSIQViewController: UIViewController {
         }
         
 //        runStyleTransfer(targetImage!)
-        runMUSIQTransfer(targetImage!)
+//        runMUSIQTransfer(targetImage!)
+        runMUSIQPredict(targetImage!)
     }
     
     @IBAction func onTapChangeStyleButton(_ sender: Any) {
@@ -198,14 +201,65 @@ class MUSIQViewController: UIViewController {
         
         // Re-run style transfer upon center-crop setting changed.
 //        runStyleTransfer(targetImage!)
-        runMUSIQTransfer(targetImage!)
+//        runMUSIQTransfer(targetImage!)
+        runMUSIQPredict(targetImage!)
+    }
+}
+
+// MARK: - MUSIQ Predict
+extension MUSIQViewController {
+    func floatValue(data: Data) -> Float32 {
+        return Float(bitPattern: UInt32(bigEndian: data.withUnsafeBytes { $0.load(as: UInt32.self) }))
+    }
+    
+    func runMUSIQPredict(_ image: UIImage) {
+        self.inferenceStatusLabel.text = "Score predict time ..."
+        self.runButton.isEnabled = false
+        self.scoreLabel.text = "MOS: ..."
+//        guard
+//            let inputRGBData = image.scaledData(
+//                with: Constants.inputImageSize,
+//                isQuantized: false
+//            )
+//        else {
+//            print("Failed to convert the input image buffer to RGB data.")
+//            return
+//        }
+        
+//        var pixelBuffer: [Float32] = []
+//        inputRGBData.withUnsafeBytes { (floatPtr: UnsafePointer<Float32>) in
+//            pixelBuffer.append(floatPtr.pointee)
+//        }
+//        print("pixelBuffer:\n\(pixelBuffer)")
+        DispatchQueue.global().async {
+            if let results = try? self.predictor.predict(image) {
+                DispatchQueue.main.async {
+    //                strongSelf.indicator.isHidden = true
+    //                strongSelf.bottomView.isHidden = false
+    //                strongSelf.benchmarkLabel.isHidden = false
+    //                strongSelf.benchmarkLabel.text = String(format: "%.2fms", results.1)
+    //                strongSelf.bottomView.update(results: results.0)
+                    print("results:\(results)")
+//                    self.inferenceStatusLabel.text = String(format: "%.2fms", results.1)
+                    self.inferenceStatusLabel.text = "score: \(results.0)\ncost: \(results.1) seconds"
+                    self.runButton.isEnabled = true
+                    self.scoreLabel.text = "MOS:\(results.0)"
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.inferenceStatusLabel.text = "predict failed!"
+                    self.runButton.isEnabled = true
+                    self.scoreLabel.text = "MOS:\(0)"
+                }
+            }
+        }
     }
 }
 
 // MARK: - MUSIQ Transfer
 extension MUSIQViewController {
-    func runMUSIQTransfer(_ image: UIImage) {
-        clearResults()
+//    func runMUSIQTransfer(_ image: UIImage) {
+//        clearResults()
         
 //        let shouldUseQuantizedFloat16 = useGPUSwitch.isOn
 //        let transferer = shouldUseQuantizedFloat16 ? gpuMUSIQTransferer : cpuMUSIQTransferer
@@ -272,7 +326,7 @@ extension MUSIQViewController {
 //                self.cropSwitch.isEnabled = true
 //                self.runButton.isEnabled = true
 //            })
-    }
+//    }
 }
 
 // MARK: - Style Transfer
@@ -399,12 +453,14 @@ extension MUSIQViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             self.targetImage = targetImage
             
-            if styleImage != nil {
+//            if styleImage != nil {
 //                runStyleTransfer(targetImage)
-                runMUSIQTransfer(targetImage)
-            } else {
-                imageView.image = targetImage
-            }
+//                runMUSIQTransfer(targetImage)
+//            } else {
+//                imageView.image = targetImage
+//            }
+            imageView.image = targetImage
+            runMUSIQPredict(targetImage)
         }
         
         dismiss(animated: true)
@@ -449,21 +505,22 @@ extension MUSIQViewController {
             
             self.targetImage = targetImage
             self.imageView.image = targetImage
+            self.runMUSIQPredict(targetImage)
         }
-        let setStyleAction = UIAlertAction(title: "Set style image", style: .default) { _ in
-            guard let croppedImage = image.cropCenter() else {
-                self.inferenceStatusLabel.text = "ERROR: Unable to crop style image."
-                return
-            }
-            
-            self.styleImage = croppedImage
-            self.styleImageView.image = croppedImage
-        }
+//        let setStyleAction = UIAlertAction(title: "Set style image", style: .default) { _ in
+//            guard let croppedImage = image.cropCenter() else {
+//                self.inferenceStatusLabel.text = "ERROR: Unable to crop style image."
+//                return
+//            }
+//
+//            self.styleImage = croppedImage
+//            self.styleImageView.image = croppedImage
+//        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             controller.dismiss(animated: true, completion: nil)
         }
         controller.addAction(setInputAction)
-        controller.addAction(setStyleAction)
+//        controller.addAction(setStyleAction)
         controller.addAction(cancelAction)
         
         return controller
@@ -480,4 +537,24 @@ extension MUSIQViewController {
         self.pasteImageButton.isEnabled = self.imageFromPasteboard() != nil
     }
     
+}
+
+
+// MARK: - Constants
+public enum MUSIQConstants {
+    // static let inputImageSize = CGSize(width: 224, height: 224)
+    
+    /*
+    32/24: 1024 * 768 = 786432, 786432 * 2 = 1572864
+    12/9: 384 * 288 = 110592, 110592 * 2 = 221184
+    7/5: 224 * 160 = 35840, 35840 * 2 = 71680
+     */
+    static let inputImageWidth: Int = 1024 // original
+    static let inputImageHeight: Int = 768 // original
+    
+    static let inputImageWidth1: Int = 384 // multi-scale 1
+    static let inputImageHeight1: Int = 288 // multi-scale 1
+    
+    static let inputImageWidth2: Int = 224 // multi-scale 2
+    static let inputImageHeight2: Int = 160 // multi-scale 2
 }

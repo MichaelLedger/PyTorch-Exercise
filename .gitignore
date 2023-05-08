@@ -8,6 +8,7 @@
 ## PyTorch
 *.pth
 *.pt
+*.ptl
 *.onnx
 
 # TensorFlow Lite model

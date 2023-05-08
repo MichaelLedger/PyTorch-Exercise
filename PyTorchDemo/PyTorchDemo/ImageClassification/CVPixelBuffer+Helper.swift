@@ -6,8 +6,8 @@ extension CVPixelBuffer {
     func normalized(_ width: Int, _ height: Int) -> [Float]? {
         let w = CVPixelBufferGetWidth(self)
         let h = CVPixelBufferGetHeight(self)
-        let pixelBufferType = CVPixelBufferGetPixelFormatType(self)
-        assert(pixelBufferType == kCVPixelFormatType_32BGRA)
+//        let pixelBufferType = CVPixelBufferGetPixelFormatType(self)
+//        assert(pixelBufferType == kCVPixelFormatType_32BGRA)//test
         let bytesPerRow = CVPixelBufferGetBytesPerRow(self)
         let bytesPerPixel = 4
         let croppedImageSize = min(w, h)

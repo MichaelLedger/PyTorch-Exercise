@@ -1,4 +1,4 @@
-import os
+import sys, os
 
 import torch
 import torchvision
@@ -11,6 +11,7 @@ from option.config import Config
 from model.backbone import resnet50_backbone
 from model.model_main import IQARegression
 
+import torch.utils.mobile_optimizer as mobile_optimizer
 
 # configuration
 config = Config({
@@ -80,6 +81,31 @@ model_transformer.eval()
 # input transform
 transforms = torchvision.transforms.Compose([Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]), ToTensor()])
 
+# An example input you would normally provide to your model's forward() method.
+example = torch.rand(1, 3, 224, 224)
+#example = torch.tensor((), dtype=torch.float64)
+#example = torch.rand(1)
+
+# Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
+traced_script_module = torch.jit.trace(model_backbone, example)
+
+# Save to file
+torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
+# This line is equivalent to the previous
+#traced_script_module.save("scriptmodule.pt")
+
+# model optimization (optional)
+#opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
+
+# save optimized model for mobile
+#opt_model._save_for_lite_interpreter("resnet50_mobile_model.ptl")
+traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl")
+
+# Exit
+sys.exit(os.EX_OK)
+
+print('should not run to here!')
+
 # save results
 pred_total = []
 
@@ -115,20 +141,13 @@ for filename in tqdm(filenames):
         feat_dis_org = model_backbone(d_img_org)
         feat_dis_scale_1 = model_backbone(d_img_scale_1)
         feat_dis_scale_2 = model_backbone(d_img_scale_2)
-        
-        print("feat_dis_org.shape:", feat_dis_org.shape)
-        print("feat_dis_scale_1.shape:", feat_dis_scale_1.shape)
-        print("feat_dis_scale_2.shape:", feat_dis_scale_2.shape)
 
         # quality prediction
         pred = model_transformer(mask_inputs, feat_dis_org, feat_dis_scale_1, feat_dis_scale_2)
         pred_total = np.append(pred_total, float(pred.item()))
-        print(pred)
+
         # result save
         line = '%s\t%f\n' % (filename, float(pred.item()))
-#print(torch.Tensor(1).dtype)
-#torch.float32
-        print("Numpy array is:\n", pred_total) #printing the 1d numpy array
         f.write(line)
 f.close()
         
