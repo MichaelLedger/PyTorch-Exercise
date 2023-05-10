@@ -855,3 +855,18 @@ tensor([[ 0.6580, -1.0969, -0.4614,  0.6580, -1.0969, -0.4614,  0.6580,
         [-0.1034, -0.5790,  0.1497, -0.1034, -0.5790,  0.1497, -0.1034,
          -0.5790,  0.1497]])
 ```
+
+## TORCH.MATMUL
+
+https://pytorch.org/docs/stable/generated/torch.matmul.html?highlight=torch+matmul#torch.matmul
+
+Matrix product of two tensors.
+
+The behavior depends on the dimensionality of the tensors as follows:
+
+If both tensors are 1-dimensional, the dot product (scalar) is returned.
+If both arguments are 2-dimensional, the matrix-matrix product is returned.
+If the first argument is 1-dimensional and the second argument is 2-dimensional, a 1 is prepended to its dimension for the purpose of the matrix multiply. After the matrix multiply, the prepended dimension is removed.
+If the first argument is 2-dimensional and the second argument is 1-dimensional, the matrix-vector product is returned.
+
+This operation has support for arguments with sparse layouts. In particular the matrix-matrix (both arguments 2-dimensional) supports sparse arguments with the same restrictions as torch.mm()
