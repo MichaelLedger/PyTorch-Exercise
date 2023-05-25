@@ -870,3 +870,28 @@ If the first argument is 1-dimensional and the second argument is 2-dimensional,
 If the first argument is 2-dimensional and the second argument is 1-dimensional, the matrix-vector product is returned.
 
 This operation has support for arguments with sparse layouts. In particular the matrix-matrix (both arguments 2-dimensional) supports sparse arguments with the same restrictions as torch.mm()
+
+
+## Answering the Query: "koniq-10k score range"
+
+The Koniq-10k dataset is a large-scale image quality assessment dataset that contains 10,073 distorted images. Each image is rated by at least 20 human observers on a scale from 1 to 5, where 1 indicates the lowest quality and 5 indicates the highest quality.
+
+The score range for the Koniq-10k dataset is from 1 to 5, with 1 being the lowest quality and 5 being the highest quality. The scores are provided in the file "koniq10kscoresanddistributions.csv" which is located in the "koniq10k" folder of the dataset.
+
+To access the scores in Python, you can use the Pandas library to read the CSV file and extract the scores. Here is an example code snippet:
+```
+import pandas as pd
+
+# Load the scores CSV file
+scores_df = pd.read_csv("koniq10k/koniq10k_scores_and_distributions.csv")
+
+# Extract the scores column
+scores = scores_df["MOS"]
+
+# Print the score range
+print("Score range: [{}, {}]".format(scores.min(), scores.max()))
+```
+
+This code will load the scores CSV file, extract the MOS (Mean Opinion Score) column, and print the score range. The output will be in the form of "[minscore, maxscore]".
+
+I hope this helps answer your query. Let me know if you have any further questions.
