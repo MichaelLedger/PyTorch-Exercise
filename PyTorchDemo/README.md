@@ -848,3 +848,17 @@ https://ml-assets.apple.com/coreml/models/Image/ImageClassification/Resnet50/Res
 ## Classifying Images with Vision and Core ML
 
 https://developer.apple.com/documentation/vision/classifying_images_with_vision_and_core_ml?language=objc
+
+## How 🤗 Accelerate runs very large models thanks to PyTorch
+
+https://huggingface.co/blog/accelerate-large-models
+
+## PyTorch vs. TensorFlow: Key Differences to Know for Deep Learning
+
+https://builtin.com/data-science/pytorch-vs-tensorflow
+
+PYTORCH VS. TENSORFLOW: AT A GLANCE
+
+- TensorFlow is a very powerful and mature deep learning library with strong visualization capabilities and several options for high-level model development. **It has production-ready deployment options and support for mobile platforms.**
+
+- PyTorch, on the other hand, is still a young framework with stronger community movement and it's more Python-friendly.
