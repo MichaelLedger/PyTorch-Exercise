@@ -820,3 +820,31 @@ Overall, training a Core ML model from a dataset requires a combination of machi
 ## Creating a Model from Tabular Data
 
 https://developer.apple.com/documentation/createml/creating_a_model_from_tabular_data
+
+## Example of speeding up inference of PyTorch models on M1 via Core ML tools
+
+https://drsleep.github.io/technical/Neural-Sketching-CoreML/
+
+## CoreML of ResNet50 for iOS app
+
+https://iosexample.com/coreml-of-resnet50-for-ios-app/
+
+https://github.com/madara-tribe?tab=repositories
+
+## Converting ONNX Image Classification Models to Core ML
+
+https://www.codeproject.com/Articles/5277526/Converting-ONNX-Image-Classification-Models-to-Cor
+
+## AI Image Classification on iOS with ResNet
+
+https://www.codeproject.com/Articles/5277527/AI-Image-Classification-on-iOS-with-ResNet
+
+## Apple - Core ML Models
+
+https://developer.apple.com/machine-learning/models/
+
+https://ml-assets.apple.com/coreml/models/Image/ImageClassification/Resnet50/Resnet50.mlmodel
+
+## Classifying Images with Vision and Core ML
+
+https://developer.apple.com/documentation/vision/classifying_images_with_vision_and_core_ml?language=objc

@@ -1613,3 +1613,60 @@ model = MLModel(spec)
 # if model type is mlprogram, i.e. spec.WhichOneof('Type') == "mlProgram", then:
 model = MLModel(spec, weights_dir=model.weights_dir)
 ```
+
+
+## PYTORCH MOBILE PERFORMANCE RECIPES
+
+https://pytorch.org/tutorials/recipes/mobile_perf.html?highlight=mobile
+
+1. Fuse operators using torch.quantization.fuse_modules
+
+`torch.quantization.fuse_modules(model, [['conv', 'bn', 'relu']], inplace=True)`
+
+2. Quantize your model
+
+Quantization of the model not only moves computation to int8, but also reduces the size of your model on a disk.
+
+That size reduction helps to reduce disk read operations during the first load of the model and decreases the amount of RAM.
+
+**Both of those resources can be crucial for the performance of mobile applications.**
+
+Introduction to Quantization on PyTorch
+
+https://pytorch.org/blog/introduction-to-quantization-on-pytorch/
+
+```
+import torch.quantization
+quantized_model = torch.quantization.quantize_dynamic(model, {torch.nn.Linear}, dtype=torch.qint8)
+```
+
+```
+model.qconfig = torch.quantization.get_default_qconfig('qnnpack')
+torch.quantization.prepare(model, inplace=True)
+# Calibrate your model
+def calibrate(model, calibration_data):
+    # Your calibration code here
+    return
+calibrate(model, [])
+torch.quantization.convert(model, inplace=True)
+```
+
+
+3. Use torch.utils.mobile_optimizer
+```
+torchscript_model_optimized = optimize_for_mobile(torchscript_model)
+torch.jit.save(torchscript_model_optimized, "model.pt")
+```
+
+4. Prefer Using Channels Last Tensor memory format
+```
+def forward(self, x):
+    x = x.contiguous(memory_format=torch.channels_last)
+    ...
+```
+
+5. Android - Reusing tensors for forward
+
+6. Load time optimization
+
+`model._save_for_lite_interpreter('path/to/file.ptl', _use_flatbuffer=True)`

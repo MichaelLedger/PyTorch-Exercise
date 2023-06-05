@@ -130,6 +130,14 @@ for filename in tqdm(filenames):
 
         # Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
         traced_script_module = torch.jit.trace(model_transformer, example_input)
+        
+        # Fuse operators using torch.quantization.fuse_modules
+        # The inplace=True argument tells PyTorch to modify the model in place, rather than returning a new model. If you don't want to modify the original model, you can set inplace=False and assign the result to a new variable.
+        # AttributeError: 'RecursiveScriptModule' object has no attribute 'conv'
+        #torch.quantization.fuse_modules(traced_script_module, [['conv', 'bn', 'relu']], inplace=True)
+        
+        # Quantization of the model not only moves computation to int8, but also reduces the size of your model on a disk.
+        # quantized_model = torch.quantization.quantize_dynamic(traced_script_module, {torch.nn.Linear}, dtype=torch.qint8)
 
         # Save to file
 #        torch.jit.save(traced_script_module, 'IQA_script_module.pt')
@@ -137,7 +145,8 @@ for filename in tqdm(filenames):
         #traced_script_module.save("scriptmodule.pt")
         
         # model optimization (optional)
-        #opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
+        # coremltools -> ValueError: Unknown value for constant: ScriptObject
+        # opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
         
         # save optimized model for mobile
         #opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl")
@@ -171,7 +180,8 @@ for filename in tqdm(filenames):
                                                    ct.TensorType(name="feat_dis_org", shape=feat_dis_org.shape),  # Replace with the correct shape
                                                    ct.TensorType(name="feat_dis_scale_1", shape=feat_dis_scale_1.shape),  # Replace with the correct shape
                                                    ct.TensorType(name="feat_dis_scale_2", shape=feat_dis_scale_2.shape),  # Replace with the correct shape
-                                                   ]
+                                                   ],
+                                           compute_precision=ct.precision.FLOAT16
                                            )
         # Set the metadata properties
         core_ml_program_model.short_description = "Unofficial pytorch implementation of the paper MUSIQ: Multi-Scale Image Quality Transformer (paper link: https://arxiv.org/abs/2108.05997).A pytorch trained model based on ResNet50 weights pretrained on the ImageNet database and the IQA KonIQ-10k dataset."

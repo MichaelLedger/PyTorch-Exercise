@@ -13,6 +13,8 @@ from model.model_main import IQARegression
 
 import torch.utils.mobile_optimizer as mobile_optimizer
 
+print('torch.__version__ %s' % torch.__version__)
+
 # configuration
 config = Config({
     'gpu_id': 0,                                                        # specify gpu number to use
@@ -128,18 +130,27 @@ for filename in tqdm(filenames):
 
         # Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
         traced_script_module = torch.jit.trace(model_transformer, example)
+        
+        # Fuse operators using torch.quantization.fuse_modules
+        # The inplace=True argument tells PyTorch to modify the model in place, rather than returning a new model. If you don't want to modify the original model, you can set inplace=False and assign the result to a new variable.
+        # AttributeError: 'RecursiveScriptModule' object has no attribute 'conv'
+        #torch.quantization.fuse_modules(traced_script_module, [['conv', 'bn', 'relu']], inplace=True)
+        
+        # Quantization of the model not only moves computation to int8, but also reduces the size of your model on a disk.
+        quantized_model = torch.quantization.quantize_dynamic(traced_script_module, {torch.nn.Linear}, dtype=torch.qint8)
 
         # Save to file
-        torch.jit.save(traced_script_module, 'IQA_script_module.pt')
+        torch.jit.save(quantized_model, 'IQA_script_module.pt')
         # This line is equivalent to the previous
         #traced_script_module.save("scriptmodule.pt")
         
         # model optimization (optional)
-        #opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
+        opt_model = mobile_optimizer.optimize_for_mobile(quantized_model)
         
         # save optimized model for mobile
-        #opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl")
-        traced_script_module._save_for_lite_interpreter("IQA_mobile_model.ptl")
+        # The extra argument _use_flatbuffer makes a FlatBuffer file instead of a zip file. The created file will be faster to load.
+        opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl", _use_flatbuffer=True)
+        #traced_script_module._save_for_lite_interpreter("IQA_mobile_model.ptl")
 
         # Exit
         sys.exit(os.EX_OK)
