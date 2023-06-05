@@ -29,7 +29,7 @@ class MUSIQViewController: UIViewController {
         }
         slideshow.backgroundColor = .black
         
-        slideshow.slideshowInterval = 5.0
+        slideshow.slideshowInterval = 0.0//5.0
         slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .under)
         slideshow.contentScaleMode = UIViewContentMode.scaleAspectFit
 
