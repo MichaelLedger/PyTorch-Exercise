@@ -13,6 +13,8 @@ from model.model_main import IQARegression
 
 import torch.utils.mobile_optimizer as mobile_optimizer
 
+import coremltools as ct
+
 # configuration
 config = Config({
     'gpu_id': 0,                                                        # specify gpu number to use
@@ -35,7 +37,7 @@ config = Config({
     'layer_norm_epsilon': 1e-12,
     'n_output': 1,                          # dimension of output
     'Grid': 10,                             # grid of 2D spatial embedding
-    'scale_1': 384,                         # multi-scale
+    'scale_1': 384,                         # multi-scale                                             
     'scale_2': 224,                         # multi-scale
 })
 
@@ -81,31 +83,6 @@ model_transformer.eval()
 # input transform
 transforms = torchvision.transforms.Compose([Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]), ToTensor()])
 
-# An example input you would normally provide to your model's forward() method.
-example = torch.rand(1, 3, 224, 224)
-#example = torch.tensor((), dtype=torch.float64)
-#example = torch.rand(1)
-
-# Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
-traced_script_module = torch.jit.trace(model_backbone, example)
-
-# Save to file
-torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
-# This line is equivalent to the previous
-#traced_script_module.save("scriptmodule.pt")
-
-# model optimization (optional)
-#opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
-
-# save optimized model for mobile
-#opt_model._save_for_lite_interpreter("resnet50_mobile_model.ptl")
-traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl")
-
-# Exit
-sys.exit(os.EX_OK)
-
-print('should not run to here!')
-
 # save results
 pred_total = []
 
@@ -144,6 +121,74 @@ for filename in tqdm(filenames):
 
         # quality prediction
         pred = model_transformer(mask_inputs, feat_dis_org, feat_dis_scale_1, feat_dis_scale_2)
+        
+        # An example input you would normally provide to your model's forward() method.
+        #example_input = torch.rand(1, 3, 224, 224)
+        #example_input = torch.tensor((), dtype=torch.float64)
+        #example_input = torch.rand(1)
+        example_input = (mask_inputs, feat_dis_org, feat_dis_scale_1, feat_dis_scale_2)
+
+        # Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
+        traced_script_module = torch.jit.trace(model_transformer, example_input)
+
+        # Save to file
+#        torch.jit.save(traced_script_module, 'IQA_script_module.pt')
+        # This line is equivalent to the previous
+        #traced_script_module.save("scriptmodule.pt")
+        
+        # model optimization (optional)
+        #opt_model = mobile_optimizer.optimize_for_mobile(traced_script_module)
+        
+        # save optimized model for mobile
+        #opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl")
+#        traced_script_module._save_for_lite_interpreter("IQA_mobile_model.ptl")
+        
+        # Using image_input in the inputs parameter:
+        # Convert to Core ML program using the Unified Conversion API.
+#        core_ml_program_model = ct.convert(
+#                                           traced_script_module,
+#                                           convert_to="mlprogram",
+##                                           inputs=[ct.TensorType(shape=example_input.shape)]
+#                                           inputs=[
+#                                                   ct.TensorType(name="mask_inputs", shape=mask_inputs.shape),  # Replace with the correct shape
+#                                                   ct.TensorType(name="feat_dis_org", shape=feat_dis_org.shape),  # Replace with the correct shape
+#                                                   ct.TensorType(name="feat_dis_scale_1", shape=feat_dis_scale_1.shape),  # Replace with the correct shape
+#                                                   ct.TensorType(name="feat_dis_scale_2", shape=feat_dis_scale_2.shape),  # Replace with the correct shape
+#                                                   ]
+#                                           )
+                           
+#        print('==start to save core ML program package!==')
+        # Save the converted model.
+#        core_ml_program_model.save("IQA_ML_Program.mlpackage")
+#        print('==success saved core ML program package!==')
+        
+        # As an alternative, you can convert the model to a neural network by eliminating the convert_to parameter:
+        core_ml_neural_network_model = ct.convert(
+                                                  traced_script_module,
+                                                  #convert_to="mlprogram",
+                                                  inputs=[
+                                                          ct.TensorType(name="mask_inputs", shape=mask_inputs.shape),  # Replace with the correct shape
+                                                          ct.TensorType(name="feat_dis_org", shape=feat_dis_org.shape),  # Replace with the correct shape
+                                                          ct.TensorType(name="feat_dis_scale_1", shape=feat_dis_scale_1.shape),  # Replace with the correct shape
+                                                          ct.TensorType(name="feat_dis_scale_2", shape=feat_dis_scale_2.shape),  # Replace with the correct shape
+                                                          ]
+                                                  )
+        # Set the metadata properties
+        core_ml_neural_network_model.short_description = "Unofficial pytorch implementation of the paper MUSIQ: Multi-Scale Image Quality Transformer (paper link: https://arxiv.org/abs/2108.05997).A pytorch trained model based on ResNet50 weights pretrained on the ImageNet database and the IQA KonIQ-10k dataset."
+        core_ml_neural_network_model.author = "PlanetArt: GavinXiang"
+        core_ml_neural_network_model.license = "MIT License."
+        core_ml_neural_network_model.version = "1.0.0"  # You can set the version number as a string
+        print('==start to save core ML neural network model!==')
+        # Save the converted model.
+        # Exception: For an ML Program, extension must be .mlpackage (not .mlmodel)
+        core_ml_neural_network_model.save("IQA_ML_Neural_Network.mlmodel")
+        print('==success saved core ML neural network model!==')
+        
+        # Exit
+        sys.exit(os.EX_OK)
+
+        print('should not run to here!')
+        
         pred_total = np.append(pred_total, float(pred.item()))
 
         # result save

@@ -13,6 +13,8 @@ from model.model_main import IQARegression
 
 import torch.utils.mobile_optimizer as mobile_optimizer
 
+import coremltools as ct
+
 # configuration
 config = Config({
     'gpu_id': 0,                                                        # specify gpu number to use
@@ -82,15 +84,15 @@ model_transformer.eval()
 transforms = torchvision.transforms.Compose([Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]), ToTensor()])
 
 # An example input you would normally provide to your model's forward() method.
-example = torch.rand(1, 3, 224, 224)
-#example = torch.tensor((), dtype=torch.float64)
-#example = torch.rand(1)
+example_input = torch.rand(1, 3, 224, 224)
+#example_input = torch.tensor((), dtype=torch.float64)
+#example_input = torch.rand(1)
 
 # Use torch.jit.trace to generate a torch.jit.ScriptModule via tracing.
-traced_script_module = torch.jit.trace(model_backbone, example)
+traced_script_module = torch.jit.trace(model_backbone, example_input)
 
 # Save to file
-torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
+#torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
 # This line is equivalent to the previous
 #traced_script_module.save("scriptmodule.pt")
 
@@ -99,7 +101,63 @@ torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
 
 # save optimized model for mobile
 #opt_model._save_for_lite_interpreter("resnet50_mobile_model.ptl")
-traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl")
+#traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl")
+
+# Define the set of image sizes (1, channel, height, width)
+#input_names = ['feat_dis_org', 'feat_dis_scale_1', 'feat_dis_scale_2']
+#input_sizes = [(1, 3, 768, 1024), (1, 3, 288, 384), (1, 3, 160, 224)]
+#input_descs = ['color (kCVPixelFormatType_32BGRA) image buffer, 1024 pixels wide by 768 pixels high',
+#               'color (kCVPixelFormatType_32BGRA) image buffer, 384 pixels wide by 288 pixels high',
+#               'color (kCVPixelFormatType_32BGRA) image buffer, 224 pixels wide by 160 pixels high']
+
+# Set the image scale and bias for input image preprocessing
+image_scale = 1/(0.226*255.0)
+image_bias = [- 0.485/(0.229) , - 0.456/(0.224), - 0.406/(0.225)]
+
+# Set the input_shape to use EnumeratedShapes.
+input_shape = ct.EnumeratedShapes(shapes=[[1, 3, 768, 1024],
+                                          [1, 3, 288, 384],
+                                          [1, 3, 160, 224]],
+                                          default=[1, 3, 768, 1024])
+
+image_input = ct.ImageType(name="input_image",
+                           shape=input_shape,
+                           scale=image_scale, bias=image_bias)
+
+# Create a list of ImageType objects
+#input_types = [ct.ImageType(shape=input_size) for input_size in input_sizes]
+#input_types = [ct.ImageType(name=input_names[0], shape=input_sizes[0]),
+#               ct.ImageType(name=input_names[1], shape=input_sizes[1]),
+#               ct.ImageType(name=input_names[2], shape=input_sizes[2])]
+#print('input_types: %s' % input_types)
+
+# Convert the PyTorch model to Core ML with input descriptions
+# As an alternative, you can convert the model to a neural network by eliminating the convert_to parameter:
+# if we define input as image type, it always failed with the following error message:
+#2023-06-02 15:47:44.435208+0800 ScoreImage[17905:1504044] [espresso] [Espresso::handle_ex_plan] exception=Espresso exception: "Invalid state": reshape mismatching size: 2147483647 1 1 1 1 -> 32 24 384 1 1 status=-5
+#2023-06-02 15:47:44.435336+0800 ScoreImage[17905:1504044] [coreml] Error computing NN outputs -5
+core_ml_neural_network_model = ct.convert(
+                                          traced_script_module,
+                                          #inputs=[ct.TensorType(shape=example_input.shape)]
+                                          inputs=[ct.TensorType(name="input_image", shape=input_shape)]
+                                          #inputs=[ct.ImageType(shape=input_shape, name="input_image")]
+#                                          inputs=[image_input]
+                                          #input_names=input_names,
+                                          #input_description=input_descs
+                                          )
+# Set the metadata properties
+core_ml_neural_network_model.short_description = "ResNet-50 from Deep Residual Learning for Image Recognition (paper link: https://arxiv.org/abs/1512.03385)."
+core_ml_neural_network_model.author = "PlanetArt: GavinXiang"
+core_ml_neural_network_model.license = "MIT License."
+core_ml_neural_network_model.version = "1.0.0"  # You can set the version number as a string
+
+# Set feature descriptions manually
+core_ml_neural_network_model.input_description["input_image"] = "input imgage as color (kCVPixelFormatType_32BGRA) image buffer, 1024 pixels wide by 768 pixels high, 384 pixels wide by 288 pixels high, 224 pixels wide by 160 pixels high."
+
+print('==start to save core ML neural network model for resnet50!==')
+# Save the Core ML model to a file with the updated metadata
+core_ml_neural_network_model.save("resnet50_ML_Neural_Network.mlmodel")
+print('==success saved core ML neural network model for resnet50!==')
 
 # Exit
 sys.exit(os.EX_OK)

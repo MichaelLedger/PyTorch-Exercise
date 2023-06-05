@@ -14,11 +14,43 @@
 
 import UIKit
 import os
+import CoreML
 
 class MUSIQViewController: UIViewController {
     
     /// Image picker for accessing the photo library or camera.
     private var imagePicker = UIImagePickerController()
+    
+    /// Sample picker
+    lazy var slideshow: ImageSlideshow = {
+        let slideshow = ImageSlideshow()
+        if (slideshow.superview == nil) {
+            view.addSubview(slideshow)
+        }
+        slideshow.backgroundColor = .black
+        
+        slideshow.slideshowInterval = 5.0
+        slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .under)
+        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFit
+
+        slideshow.pageIndicator = UIPageControl()
+
+        // optional way to show activity indicator during image load (skipping the line will show no activity indicator)
+        slideshow.activityIndicator = DefaultActivityIndicator()
+        slideshow.delegate = self
+
+        var localSource: [BundleImageSource] = []
+        for image in sampleImageNames {
+            localSource.append(BundleImageSource(imageString: image))
+        }
+        // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
+        slideshow.setImageInputs(localSource)
+
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(MUSIQViewController.didTap))
+        slideshow.addGestureRecognizer(recognizer)
+        
+        return slideshow
+    }()
     
     /// Style transferer instance reponsible for running the TF model. Uses a Int8-based model and
     /// runs inference on the CPU.
@@ -30,7 +62,8 @@ class MUSIQViewController: UIViewController {
 //    private var gpuStyleTransferer: StyleTransferer?
 //    private var gpuMUSIQTransferer: MUSIQTransferer?
     
-    private var predictor = MUSIQPredictor()
+//    private var predictor = MUSIQPredictor()
+    private var coreMLPredictor = MUSIQCoreMLPredictor()
     
     /// Target image to transfer a style onto.
     private var targetImage: UIImage?
@@ -58,7 +91,7 @@ class MUSIQViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         
         // Setup image picker.
         imagePicker.delegate = self
@@ -137,6 +170,10 @@ class MUSIQViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func onTapSamplePicker(_ sender: Any) {
+        openSamplePicker()
+    }
+    
     @IBAction func onTapRunButton(_ sender: Any) {
         // Make sure that the cached target image is available.
         guard targetImage != nil else {
@@ -172,6 +209,8 @@ class MUSIQViewController: UIViewController {
     @IBAction func onTapPhotoLibrary(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true)
+        
+//        openPHPicker()
     }
     
     /// Handle tapping on different display mode: Input, Style, Result
@@ -212,7 +251,27 @@ extension MUSIQViewController {
         return Float(bitPattern: UInt32(bigEndian: data.withUnsafeBytes { $0.load(as: UInt32.self) }))
     }
     
-    func runMUSIQPredict(_ image: UIImage) {
+    func runMUSIQPredict(_ image: UIImage?) {
+        guard let image = image else {
+            inferenceStatusLabel.text = "Error: Input image is nil."
+            return
+        }
+        
+        // Rotate target image to .up orientation to avoid potential orientation misalignment.
+        guard let targetImage = image.transformOrientationToUp() else {
+            inferenceStatusLabel.text = "ERROR: Image orientation couldn't be fixed."
+            return
+        }
+        
+        self.targetImage = targetImage
+//            if styleImage != nil {
+//                runStyleTransfer(targetImage)
+//                runMUSIQTransfer(targetImage)
+//            } else {
+//                imageView.image = targetImage
+//            }
+        imageView.image = targetImage
+        
         self.inferenceStatusLabel.text = "Score predict time ..."
         self.runButton.isEnabled = false
         self.scoreLabel.text = "MOS: ..."
@@ -231,28 +290,44 @@ extension MUSIQViewController {
 //            pixelBuffer.append(floatPtr.pointee)
 //        }
 //        print("pixelBuffer:\n\(pixelBuffer)")
+        
+        // Pytorch model -- begin
+//        DispatchQueue.global().async {
+//            if let results = try? self.predictor.predict(image) {
+//                DispatchQueue.main.async {
+//    //                strongSelf.indicator.isHidden = true
+//    //                strongSelf.bottomView.isHidden = false
+//    //                strongSelf.benchmarkLabel.isHidden = false
+//    //                strongSelf.benchmarkLabel.text = String(format: "%.2fms", results.1)
+//    //                strongSelf.bottomView.update(results: results.0)
+//                    print("results:\(results)")
+////                    self.inferenceStatusLabel.text = String(format: "%.2fms", results.1)
+//                    self.inferenceStatusLabel.text = "score: \(results.0)\ncost: \(results.1) seconds"
+//                    self.runButton.isEnabled = true
+//                    self.scoreLabel.text = "MOS:\(results.0)"
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.inferenceStatusLabel.text = "predict failed!"
+//                    self.runButton.isEnabled = true
+//                    self.scoreLabel.text = "MOS:\(0)"
+//                }
+//            }
+//        }
+        // Pytorch model -- end
+        
+        // Core ML - begin
         DispatchQueue.global().async {
-            if let results = try? self.predictor.predict(image) {
+            self.coreMLPredictor.predict(image: image, completion: { (score, time) in
                 DispatchQueue.main.async {
-    //                strongSelf.indicator.isHidden = true
-    //                strongSelf.bottomView.isHidden = false
-    //                strongSelf.benchmarkLabel.isHidden = false
-    //                strongSelf.benchmarkLabel.text = String(format: "%.2fms", results.1)
-    //                strongSelf.bottomView.update(results: results.0)
-                    print("results:\(results)")
-//                    self.inferenceStatusLabel.text = String(format: "%.2fms", results.1)
-                    self.inferenceStatusLabel.text = "score: \(results.0)\ncost: \(results.1) seconds"
+                    print("results:\(score),\(time)")
+                    self.inferenceStatusLabel.text = "score: \(score)\ncost: \(time) millisecond"
                     self.runButton.isEnabled = true
-                    self.scoreLabel.text = "MOS:\(results.0)"
+                    self.scoreLabel.text = "MOS:\(score)"
                 }
-            } else {
-                DispatchQueue.main.async {
-                    self.inferenceStatusLabel.text = "predict failed!"
-                    self.runButton.isEnabled = true
-                    self.scoreLabel.text = "MOS:\(0)"
-                }
-            }
+            })
         }
+        // Core ML - end
     }
 }
 
@@ -445,22 +520,7 @@ extension MUSIQViewController: UIImagePickerControllerDelegate, UINavigationCont
     ) {
         
         if let pickedImage = info[.originalImage] as? UIImage {
-            // Rotate target image to .up orientation to avoid potential orientation misalignment.
-            guard let targetImage = pickedImage.transformOrientationToUp() else {
-                inferenceStatusLabel.text = "ERROR: Image orientation couldn't be fixed."
-                return
-            }
-            
-            self.targetImage = targetImage
-            
-//            if styleImage != nil {
-//                runStyleTransfer(targetImage)
-//                runMUSIQTransfer(targetImage)
-//            } else {
-//                imageView.image = targetImage
-//            }
-            imageView.image = targetImage
-            runMUSIQPredict(targetImage)
+            runMUSIQPredict(pickedImage)
         }
         
         dismiss(animated: true)
@@ -497,15 +557,7 @@ extension MUSIQViewController {
                                            preferredStyle: .actionSheet)
         controller.popoverPresentationController?.sourceView = view
         let setInputAction = UIAlertAction(title: "Set input image", style: .default) { _ in
-            // Rotate target image to .up orientation to avoid potential orientation misalignment.
-            guard let targetImage = image.transformOrientationToUp() else {
-                self.inferenceStatusLabel.text = "ERROR: Image orientation couldn't be fixed."
-                return
-            }
-            
-            self.targetImage = targetImage
-            self.imageView.image = targetImage
-            self.runMUSIQPredict(targetImage)
+            self.runMUSIQPredict(image)
         }
 //        let setStyleAction = UIAlertAction(title: "Set style image", style: .default) { _ in
 //            guard let croppedImage = image.cropCenter() else {
@@ -539,6 +591,93 @@ extension MUSIQViewController {
     
 }
 
+import Photos
+import PhotosUI
+
+// MARK: - PHPicker Configurations (PHPickerViewControllerDelegate)
+extension MUSIQViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+         picker.dismiss(animated: true, completion: .none)
+         results.forEach { result in
+               result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+               guard let image = reading as? UIImage, error == nil else { return }
+               DispatchQueue.main.async {
+                   // TODO: - Here you get UIImage
+                   self.runMUSIQPredict(image)
+               }
+//               result.itemProvider.loadFileRepresentation(forTypeIdentifier: "public.image") { [weak self] url, _ in
+//                   // TODO: - Here You Get The URL
+//               }
+          }
+       }
+  }
+
+   /// call this method for `PHPicker`
+   func openPHPicker() {
+       var phPickerConfig = PHPickerConfiguration(photoLibrary: .shared())
+       phPickerConfig.selectionLimit = 1
+       phPickerConfig.filter = PHPickerFilter.any(of: [.images, .livePhotos])
+       let phPickerVC = PHPickerViewController(configuration: phPickerConfig)
+       phPickerVC.delegate = self
+       present(phPickerVC, animated: true)
+   }
+}
+
+import ImageSlideshow
+
+let sampleImageNames = ["826373",
+                       "2017266",
+                       "2190310",
+                       "2313142",
+                       "2484057",
+                       "2704811",
+                       "3039024",
+                       "3615562",
+                       "3620726",
+                       "3628043"]
+
+// MARK: - Sample Picker
+extension MUSIQViewController {
+    func openSamplePicker() {
+        slideshow.isHidden = false
+        slideshow.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+        slideshow.alpha = 0.0
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut) {
+            self.slideshow.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+            self.slideshow.alpha = 1.0
+        }
+    }
+    
+    @objc func didTap() {
+//        let fullScreenController = slideshow.presentFullScreenController(from: self)
+//        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+//        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+        
+        slideshow.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+        slideshow.alpha = 1.0
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut) {
+            self.slideshow.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+            self.slideshow.alpha = 0.0
+        } completion: { _ in
+            self.slideshow.isHidden = true
+            
+            guard self.slideshow.currentPage < sampleImageNames.count else {
+                return
+            }
+            let imageName = sampleImageNames[self.slideshow.currentPage]
+            guard let image: UIImage = UIImage(named: imageName) else {
+                return
+            }
+            self.runMUSIQPredict(image)
+        }
+    }
+}
+
+extension MUSIQViewController: ImageSlideshowDelegate {
+    func imageSlideshow(_ imageSlideshow: ImageSlideshow, didChangeCurrentPageTo page: Int) {
+//        print("current page:", page)
+    }
+}
 
 // MARK: - Constants
 public enum MUSIQConstants {
@@ -558,3 +697,4 @@ public enum MUSIQConstants {
     static let inputImageWidth2: Int = 224 // multi-scale 2
     static let inputImageHeight2: Int = 160 // multi-scale 2
 }
+

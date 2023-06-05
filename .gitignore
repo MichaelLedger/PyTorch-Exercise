@@ -1,9 +1,12 @@
 ## macOS
 .DS_Store
 
-## Dataset
+# Dataset
+## IQA
 512x384/
 1024x768/
+## SPQA
+TestImage/
 
 ## PyTorch
 *.pth
@@ -15,6 +18,12 @@
 *.tflite
 *.pb
 *.npz
+
+# Core Machine Learning
+## Program
+*.mlpackage
+## neural network model
+*.mlmodel
 
 # Miniforge
 Mambaforge-Darwin-arm64.sh

@@ -68,7 +68,7 @@
 @implementation MUSIQTorchModule
 
 - (NSDictionary *)configuration {
-    return @{@"n_enc_seq": @(32*24 + 12*9 + 7*5), //input feature map dimension (N = H*W) from backbone
+    return @{@"n_enc_seq": @(32*24 + 12*9 + 7*5), //input feature map dimension (N = H*W) from backbone // 911
              @"batch_size" : @(1), // fix the value as 1 (for inference)
     };
 }
@@ -95,15 +95,15 @@
         
         //test
         // convert image data to Tensor
-        //        tensor = tensor.permute({2,0,1});
-        //        tensor = tensor.toType(torch::kFloat);
-        //        tensor = tensor.div(255);
-        //        tensor = tensor.unsqueeze(0); //# add a new dimension at position 0
+        // tensor = tensor.permute({2, 0, 1});
+        // tensor = tensor.toType(torch::kFloat);
+        // tensor = tensor.div(255);
+        // tensor = tensor.unsqueeze(0); //# add a new dimension at position 0
         
         NSDictionary *config = [self configuration];
         int batchSize = [[config valueForKey:@"batch_size"] intValue];
         int n_enc_seq = [[config valueForKey:@"n_enc_seq"] intValue];
-        auto mask_inputs = at::ones({batchSize, n_enc_seq+1});
+        auto mask_inputs = at::ones({batchSize, n_enc_seq+1}); // 911+1=912
         //        torch::ones(at::IntArrayRef size)
         //        torch::ones(@[@(batchSize), @(n_enc_seq + 1)]);
         //        var maskInputs = torch.ones([config.batchSize, config.nEncSeq+1], device: config.device);
@@ -146,6 +146,13 @@
 //        tensor = tensor.to(at::kFloat).div(255).unsqueeze(0);
 //        tensor = tensor.permute({ 0, 3, 1, 2 });
 //        tensor.sub_(0.5).div_(0.5);
+        
+        /*
+         OpenCV img = cv2.imread(path) loads an image with HWC-layout (height, width, channels), while Pytorch requires CHW-layout. So we have to do np.transpose(image,(2,0,1)) for HWC->CHW transformation.
+         */
+        tensor = tensor.permute({2, 0, 1});
+        scaledTensor1 = scaledTensor1.permute({2, 0, 1});
+        scaledTensor2 = scaledTensor2.permute({2, 0, 1});
         
         tensor = tensor.to(torch::kCPU);
         scaledTensor1 = scaledTensor1.to(torch::kCPU);
