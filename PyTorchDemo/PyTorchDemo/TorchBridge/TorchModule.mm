@@ -150,9 +150,9 @@
         /*
          OpenCV img = cv2.imread(path) loads an image with HWC-layout (height, width, channels), while Pytorch requires CHW-layout. So we have to do np.transpose(image,(2,0,1)) for HWC->CHW transformation.
          */
-        tensor = tensor.permute({2, 0, 1});
-        scaledTensor1 = scaledTensor1.permute({2, 0, 1});
-        scaledTensor2 = scaledTensor2.permute({2, 0, 1});
+//        tensor = tensor.permute({2, 0, 1});
+//        scaledTensor1 = scaledTensor1.permute({2, 0, 1});
+//        scaledTensor2 = scaledTensor2.permute({2, 0, 1});
         
         tensor = tensor.to(torch::kCPU);
         scaledTensor1 = scaledTensor1.to(torch::kCPU);
@@ -241,7 +241,10 @@
         auto iqaOutput = _sub_impl.forward({inputs}).toTensor();
         float iqa_score = iqaOutput.item<float>();
         std::cout << "iqa_score:" << iqa_score << std::endl;
-        return iqa_score;
+        //Scores range from 1 to 5, same as scores from Koniq-10k dataset
+        //converted to 0~100
+        float iqa_score_range_reset = (iqa_score - 1) / 4.0 * 100;
+        return iqa_score_range_reset;
         
         //        torch::jit::Object::Property item = _impl.get_property("item");
         //        auto genericList = _impl.run_method("item");

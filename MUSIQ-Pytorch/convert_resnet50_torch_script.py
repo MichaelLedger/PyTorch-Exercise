@@ -99,7 +99,7 @@ torch.jit.save(traced_script_module, 'resnet50_script_module.pt')
 
 # save optimized model for mobile
 #opt_model._save_for_lite_interpreter("resnet50_mobile_model.ptl")
-traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl")
+traced_script_module._save_for_lite_interpreter("resnet50_mobile_model.ptl", _use_flatbuffer=False)
 
 # Exit
 sys.exit(os.EX_OK)

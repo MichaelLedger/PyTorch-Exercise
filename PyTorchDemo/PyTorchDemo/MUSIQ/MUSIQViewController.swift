@@ -62,8 +62,8 @@ class MUSIQViewController: UIViewController {
 //    private var gpuStyleTransferer: StyleTransferer?
 //    private var gpuMUSIQTransferer: MUSIQTransferer?
     
-//    private var predictor = MUSIQPredictor()
-    private var coreMLPredictor = MUSIQCoreMLPredictor()
+    private var predictor = MUSIQPredictor()
+//    private var coreMLPredictor = MUSIQCoreMLPredictor()
     
     /// Target image to transfer a style onto.
     private var targetImage: UIImage?
@@ -292,41 +292,41 @@ extension MUSIQViewController {
 //        print("pixelBuffer:\n\(pixelBuffer)")
         
         // Pytorch model -- begin
-//        DispatchQueue.global().async {
-//            if let results = try? self.predictor.predict(image) {
-//                DispatchQueue.main.async {
-//    //                strongSelf.indicator.isHidden = true
-//    //                strongSelf.bottomView.isHidden = false
-//    //                strongSelf.benchmarkLabel.isHidden = false
-//    //                strongSelf.benchmarkLabel.text = String(format: "%.2fms", results.1)
-//    //                strongSelf.bottomView.update(results: results.0)
-//                    print("results:\(results)")
-////                    self.inferenceStatusLabel.text = String(format: "%.2fms", results.1)
-//                    self.inferenceStatusLabel.text = "score: \(results.0)\ncost: \(results.1) seconds"
-//                    self.runButton.isEnabled = true
-//                    self.scoreLabel.text = "MOS:\(results.0)"
-//                }
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.inferenceStatusLabel.text = "predict failed!"
-//                    self.runButton.isEnabled = true
-//                    self.scoreLabel.text = "MOS:\(0)"
-//                }
-//            }
-//        }
+        DispatchQueue.global().async {
+            if let results = try? self.predictor.predict(image) {
+                DispatchQueue.main.async {
+    //                strongSelf.indicator.isHidden = true
+    //                strongSelf.bottomView.isHidden = false
+    //                strongSelf.benchmarkLabel.isHidden = false
+    //                strongSelf.benchmarkLabel.text = String(format: "%.2fms", results.1)
+    //                strongSelf.bottomView.update(results: results.0)
+                    print("results:\(results)")
+//                    self.inferenceStatusLabel.text = String(format: "%.2fms", results.1)
+                    self.inferenceStatusLabel.text = "score: \(results.0)\ncost: \(results.1) seconds"
+                    self.runButton.isEnabled = true
+                    self.scoreLabel.text = "MOS:\(results.0)"
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.inferenceStatusLabel.text = "predict failed!"
+                    self.runButton.isEnabled = true
+                    self.scoreLabel.text = "MOS:\(0)"
+                }
+            }
+        }
         // Pytorch model -- end
         
         // Core ML - begin
-        DispatchQueue.global().async {
-            self.coreMLPredictor.predict(image: image, completion: { (score, time) in
-                DispatchQueue.main.async {
-                    print("results:\(score),\(time)")
-                    self.inferenceStatusLabel.text = "score: \(score)\ncost: \(time) millisecond"
-                    self.runButton.isEnabled = true
-                    self.scoreLabel.text = "MOS:\(score)"
-                }
-            })
-        }
+//        DispatchQueue.global().async {
+//            self.coreMLPredictor.predict(image: image, completion: { (score, time) in
+//                DispatchQueue.main.async {
+//                    print("results:\(score),\(time)")
+//                    self.inferenceStatusLabel.text = "score: \(score)\ncost: \(time) millisecond"
+//                    self.runButton.isEnabled = true
+//                    self.scoreLabel.text = "MOS:\(score)"
+//                }
+//            })
+//        }
         // Core ML - end
     }
 }

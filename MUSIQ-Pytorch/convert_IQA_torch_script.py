@@ -149,7 +149,7 @@ for filename in tqdm(filenames):
         
         # save optimized model for mobile
         # The extra argument _use_flatbuffer makes a FlatBuffer file instead of a zip file. The created file will be faster to load.
-        opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl", _use_flatbuffer=True)
+        opt_model._save_for_lite_interpreter("IQA_mobile_model.ptl", _use_flatbuffer=False)
         #traced_script_module._save_for_lite_interpreter("IQA_mobile_model.ptl")
 
         # Exit

@@ -8,14 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		317405D4B903389F095437F9 /* libPods-PyTorchDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7979B2F34323D9EE8FC8B726 /* libPods-PyTorchDemo.a */; };
-		672C0A492A284E1A00FF66A8 /* MUSIQCoreMLPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C0A482A284E1A00FF66A8 /* MUSIQCoreMLPredictor.swift */; };
-		676CA7EE2A299184003D67BF /* resnet50_ML_Neural_Network.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 676CA7EC2A299184003D67BF /* resnet50_ML_Neural_Network.mlmodel */; };
 		676CA7F32A2ACA2F003D67BF /* UIApplication+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CA7F22A2ACA2F003D67BF /* UIApplication+Helper.swift */; };
 		676CA7F52A2AD1EF003D67BF /* SampleImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 676CA7F42A2AD1EF003D67BF /* SampleImage.xcassets */; };
-		676CA7F92A2B3CDD003D67BF /* IQA_ML_Program_Compressed.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 676CA7F82A2B3CDD003D67BF /* IQA_ML_Program_Compressed.mlpackage */; };
 		6775001929F7DA240002FD7E /* MUSIQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775001829F7DA240002FD7E /* MUSIQViewController.swift */; };
 		6775002C29F7DB360002FD7E /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775002A29F7DB360002FD7E /* TFLiteExtension.swift */; };
 		6775002D29F7DB360002FD7E /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775002B29F7DB360002FD7E /* UIKitExtension.swift */; };
+		678D0A0C2A5B98FE005A506A /* IQA_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67E9171C2A077E0300494648 /* IQA_mobile_model.ptl */; };
+		678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */; };
 		679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679958F429F8B34400BB7010 /* MUSIQPredictor.swift */; };
 		A01F52AC233C6C32004039FC /* topics.txt in Resources */ = {isa = PBXBuildFile; fileRef = A01F52AB233C6C32004039FC /* topics.txt */; };
 		A01F52AE233C985C004039FC /* Predictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01F52AD233C985C004039FC /* Predictor.swift */; };
@@ -349,11 +348,13 @@
 				A065C92B2335711B006BEAAD /* words.txt in Resources */,
 				A036EA30233B1C0B00054A36 /* NLPModelCard.xib in Resources */,
 				A03349C0233D6A7E003425FD /* ImageClassificationResultView.xib in Resources */,
+				678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */,
 				A091B1A123303F2D0008A5B8 /* LaunchScreen.storyboard in Resources */,
 				A091B19E23303F2D0008A5B8 /* Assets.xcassets in Resources */,
 				676CA7F52A2AD1EF003D67BF /* SampleImage.xcassets in Resources */,
 				A03349CA233DAE9F003425FD /* NLPResultView.xib in Resources */,
 				A03349C4233D71F2003425FD /* ImageClassificationItemView.xib in Resources */,
+				678D0A0C2A5B98FE005A506A /* IQA_mobile_model.ptl in Resources */,
 				A036EA33233C19F500054A36 /* reddit.pt in Resources */,
 				B1C35BA725C99B5200CAB118 /* trace_model.py in Resources */,
 				A03349CE233DB128003425FD /* NLPItemView.xib in Resources */,
@@ -413,7 +414,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				676CA7F92A2B3CDD003D67BF /* IQA_ML_Program_Compressed.mlpackage in Sources */,
 				A03349BA233D37D4003425FD /* UIViewController+Helper.swift in Sources */,
 				A091B75E2330789A0008A5B8 /* ImageClassificationViewController.swift in Sources */,
 				A036EA2B233B167A00054A36 /* NLPPredictor.swift in Sources */,
@@ -424,13 +424,11 @@
 				A091B76223315D1A0008A5B8 /* CameraPreviewView.swift in Sources */,
 				A091B19723303F2D0008A5B8 /* AppDelegate.swift in Sources */,
 				676CA7F32A2ACA2F003D67BF /* UIApplication+Helper.swift in Sources */,
-				676CA7EE2A299184003D67BF /* resnet50_ML_Neural_Network.mlmodel in Sources */,
 				A01F52AE233C985C004039FC /* Predictor.swift in Sources */,
 				679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */,
 				A03349B8233D2F8F003425FD /* UIColor+Helper.swift in Sources */,
 				A09E179423398CC9002F8F15 /* VisionModelCard.swift in Sources */,
 				A036EA2E233B1BFE00054A36 /* NLPModelCard.swift in Sources */,
-				672C0A492A284E1A00FF66A8 /* MUSIQCoreMLPredictor.swift in Sources */,
 				A06D4CCD2330AAA200763E16 /* CameraController.swift in Sources */,
 				6775002D29F7DB360002FD7E /* UIKitExtension.swift in Sources */,
 				A0B12D4E2338944900380B1D /* TorchModule.mm in Sources */,

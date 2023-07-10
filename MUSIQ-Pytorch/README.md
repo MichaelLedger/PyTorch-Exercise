@@ -1670,3 +1670,5 @@ def forward(self, x):
 6. Load time optimization
 
 `model._save_for_lite_interpreter('path/to/file.ptl', _use_flatbuffer=True)`
+
+`2023-07-10 09:41:04.924323+0800 ScoreImage[2338:910900] Flatbuffer input file but the build hasn't enable flatbuffer`

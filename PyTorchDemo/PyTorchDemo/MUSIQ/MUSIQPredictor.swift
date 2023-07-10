@@ -10,8 +10,8 @@ import UIKit
 class MUSIQPredictor: Predictor {
     private var isRunning: Bool = false
     private lazy var module: MUSIQTorchModule = {
-        // resnet50_script_module.pt / resnet50_mobile_model.ptl
-        // IQA_script_module.pt / IQA_mobile_model.ptl
+        // file: resnet50_script_module.pt / resnet50_mobile_model.ptl
+        // subFile: IQA_script_module.pt / IQA_mobile_model.ptl
         if let filePath = Bundle.main.path(forResource: "resnet50_mobile_model", ofType: "ptl"),
            let subFilePath = Bundle.main.path(forResource: "IQA_mobile_model", ofType: "ptl"),
            let module = MUSIQTorchModule(fileAtPath: filePath, subFilePath: subFilePath) {
