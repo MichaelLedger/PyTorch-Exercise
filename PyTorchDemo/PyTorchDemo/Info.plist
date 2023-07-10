@@ -22,8 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>PyTorchDemo uses the camera to take photos and video</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app uses the library for testing purposes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses the library for testing purposes</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
