@@ -47,6 +47,7 @@ class TeacherModelPredictor: Predictor {
 
 // Constants for the model
 public enum TeacherModelConstants {
-    static let inputImageWidth: Int = 1914  // From the log
-    static let inputImageHeight: Int = 1188 // From the log
+    // reduce memory consumption for mobile device & speed up inference
+    static let inputImageWidth: Int =  533 // 1600  // From the log
+    static let inputImageHeight: Int = 331 //993 // From the log
 }

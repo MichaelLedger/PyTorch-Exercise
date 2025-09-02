@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		317405D4B903389F095437F9 /* libPods-PyTorchDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7979B2F34323D9EE8FC8B726 /* libPods-PyTorchDemo.a */; };
 		676CA7F32A2ACA2F003D67BF /* UIApplication+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CA7F22A2ACA2F003D67BF /* UIApplication+Helper.swift */; };
-		676CA7F52A2AD1EF003D67BF /* SampleImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 676CA7F42A2AD1EF003D67BF /* SampleImage.xcassets */; };
 		6775001929F7DA240002FD7E /* MUSIQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775001829F7DA240002FD7E /* MUSIQViewController.swift */; };
 		6775002C29F7DB360002FD7E /* TFLiteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775002A29F7DB360002FD7E /* TFLiteExtension.swift */; };
 		6775002D29F7DB360002FD7E /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775002B29F7DB360002FD7E /* UIKitExtension.swift */; };
-		678D0A0C2A5B98FE005A506A /* IQA_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67E9171C2A077E0300494648 /* IQA_mobile_model.ptl */; };
-		678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */; };
 		67938F7B2E66DCCE007F43FF /* TeacherModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */; };
 		67938FB82E66DCCE007F43FF /* TeacherModelPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */; };
 		6793A82D2E66DCCE007F43FF /* teacher_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67938F4F2E66DCCC007F43FF /* teacher_model.ptl */; };
@@ -25,7 +22,6 @@
 		A0296C4A2333178500C77366 /* NLPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296C492333178500C77366 /* NLPViewController.swift */; };
 		A03349B8233D2F8F003425FD /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03349B6233D2F8F003425FD /* UIColor+Helper.swift */; };
 		A03349BA233D37D4003425FD /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03349B9233D37D4003425FD /* UIViewController+Helper.swift */; };
-		A03349BC233D5E7C003425FD /* mobilenet_quantized.pt in Resources */ = {isa = PBXBuildFile; fileRef = A03349BB233D5E7C003425FD /* mobilenet_quantized.pt */; };
 		A03349BE233D69A6003425FD /* ImageClassificationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03349BD233D69A6003425FD /* ImageClassificationResultView.swift */; };
 		A03349C0233D6A7E003425FD /* ImageClassificationResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03349BF233D6A7E003425FD /* ImageClassificationResultView.xib */; };
 		A03349C2233D71E0003425FD /* ImageClassificationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03349C1233D71E0003425FD /* ImageClassificationItemView.swift */; };
@@ -373,18 +369,14 @@
 				6793A82D2E66DCCE007F43FF /* teacher_model.ptl in Resources */,
 				6793B3AF2E66DCCE007F43FF /* Main.storyboard in Resources */,
 				A03349C0233D6A7E003425FD /* ImageClassificationResultView.xib in Resources */,
-				678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */,
 				A091B1A123303F2D0008A5B8 /* LaunchScreen.storyboard in Resources */,
 				A091B19E23303F2D0008A5B8 /* Assets.xcassets in Resources */,
-				676CA7F52A2AD1EF003D67BF /* SampleImage.xcassets in Resources */,
 				A03349CA233DAE9F003425FD /* NLPResultView.xib in Resources */,
 				A03349C4233D71F2003425FD /* ImageClassificationItemView.xib in Resources */,
-				678D0A0C2A5B98FE005A506A /* IQA_mobile_model.ptl in Resources */,
 				A036EA33233C19F500054A36 /* reddit.pt in Resources */,
 				B1C35BA725C99B5200CAB118 /* trace_model.py in Resources */,
 				A03349CE233DB128003425FD /* NLPItemView.xib in Resources */,
 				A01F52AC233C6C32004039FC /* topics.txt in Resources */,
-				A03349BC233D5E7C003425FD /* mobilenet_quantized.pt in Resources */,
 				A09E1796233990A0002F8F15 /* VisionModelCard.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
