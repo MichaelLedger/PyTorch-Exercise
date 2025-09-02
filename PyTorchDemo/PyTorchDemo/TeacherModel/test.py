@@ -97,7 +97,7 @@ def transform_ori(img):
 
 # vitAttIQA
 full_size = [int(1907), int(1231)]
-print('full size', full_size)
+print('full size via vitAttIQA', full_size)
 def load_image_vitAttIQA(img_path):
     def resize(d_img, size = [1740, 1080]):
         size = list(size)
@@ -124,7 +124,7 @@ def transform_vitAttIQA(img):
     return transforms(img)
 
 # vitAttIQAMoNet
-print('full size', full_size)
+print('full size via vitAttIQAMoNet', full_size)
 def load_image_vitAttIQAMoNet(img_path):
     def resize(d_img, size = [1740, 1080]):
         size = list(size)
@@ -153,7 +153,7 @@ def transform_vitAttIQAMoNet(img):
     return transforms(img)
 
 # mobileMoNet
-print('full size', full_size)
+print('full size via mobileMoNet', full_size)
 def load_image_mobileMoNet(img_path):
     def resize(d_img, size = [1740, 1080]):
         size = list(size)
@@ -317,11 +317,12 @@ if __name__ == '__main__':
     iq_score = inference(config)
     res_score = {}
     if isinstance(iq_score, list):
-        print('Image Name\timage quality score')
+        print('[Instance] Image Name\timage quality score')
         for (image_name, score) in iq_score:
             res_score[image_name] = score
+            print(f"[Instance] {image_name}, score: {score:.4f}")
     else:
-        print('The image quality score is: %.4f' % iq_score)
+        print('[Non-Instance] The image quality score is: %.4f' % iq_score)
 
     # Just print the scores
     for image_name, score in iq_score:
