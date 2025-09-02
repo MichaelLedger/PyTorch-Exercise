@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Teacher Model View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="TeacherModelViewController" customModule="PyTorchDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qf2-7g-hWc">
+                                <rect key="frame" x="16" y="75" width="361" height="361"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Qf2-7g-hWc" secondAttribute="height" multiplier="1:1" id="dg8-h6-gf4"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-Ug-gf5">
+                                <rect key="frame" x="16" y="452" width="361" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-h8-gKp">
+                                        <rect key="frame" x="0.0" y="0.0" width="109.66666666666667" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Camera"/>
+                                        <connections>
+                                            <action selector="onTapOpenCamera:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hWe-Ug-gf6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-h8-gKq">
+                                        <rect key="frame" x="125.66666666666666" y="0.0" width="109.66666666666666" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Gallery"/>
+                                        <connections>
+                                            <action selector="onTapPhotoLibrary:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hWe-Ug-gf7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-h8-gKr">
+                                        <rect key="frame" x="251.33333333333334" y="0.0" width="109.66666666666666" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Score"/>
+                                        <connections>
+                                            <action selector="onTapRunButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hWe-Ug-gf8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dg8-h6-gf5"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-Ug-gf9">
+                                <rect key="frame" x="16" y="518" width="361" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: --" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-Ug-gf10">
+                                <rect key="frame" x="16" y="554.33333333333337" width="361" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-Ug-gf11">
+                                <rect key="frame" x="16" y="594.33333333333337" width="361" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Paste Image"/>
+                                <connections>
+                                    <action selector="onTapPasteImage:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hWe-Ug-gf12"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qf2-7g-hWc" secondAttribute="trailing" constant="16" id="1"/>
+                            <constraint firstItem="Qf2-7g-hWc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="2"/>
+                            <constraint firstItem="Qf2-7g-hWc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="3"/>
+                            <constraint firstItem="hWe-Ug-gf5" firstAttribute="top" secondItem="Qf2-7g-hWc" secondAttribute="bottom" constant="16" id="4"/>
+                            <constraint firstItem="hWe-Ug-gf5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hWe-Ug-gf5" secondAttribute="trailing" constant="16" id="6"/>
+                            <constraint firstItem="hWe-Ug-gf9" firstAttribute="top" secondItem="hWe-Ug-gf5" secondAttribute="bottom" constant="16" id="7"/>
+                            <constraint firstItem="hWe-Ug-gf9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="8"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hWe-Ug-gf9" secondAttribute="trailing" constant="16" id="9"/>
+                            <constraint firstItem="hWe-Ug-gf10" firstAttribute="top" secondItem="hWe-Ug-gf9" secondAttribute="bottom" constant="16" id="10"/>
+                            <constraint firstItem="hWe-Ug-gf10" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="11"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hWe-Ug-gf10" secondAttribute="trailing" constant="16" id="12"/>
+                            <constraint firstItem="hWe-Ug-gf11" firstAttribute="top" secondItem="hWe-Ug-gf10" secondAttribute="bottom" constant="16" id="13"/>
+                            <constraint firstItem="hWe-Ug-gf11" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="14"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hWe-Ug-gf11" secondAttribute="trailing" constant="16" id="15"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Qf2-7g-hWc" id="16"/>
+                        <outlet property="inferenceStatusLabel" destination="hWe-Ug-gf9" id="17"/>
+                        <outlet property="photoCameraButton" destination="bYc-h8-gKp" id="18"/>
+                        <outlet property="runButton" destination="bYc-h8-gKr" id="19"/>
+                        <outlet property="scoreLabel" destination="hWe-Ug-gf10" id="20"/>
+                        <outlet property="pasteImageButton" destination="hWe-Ug-gf11" id="21"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

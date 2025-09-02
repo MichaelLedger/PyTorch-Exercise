@@ -330,6 +330,36 @@
 
 @end
 
+@implementation TeacherTorchModule
+
+- (float)predictImage:(void*)imageBuffer
+                 size:(CGSize)size {
+    try {
+        // Create input tensor from image buffer
+        at::Tensor tensor = torch::from_blob(imageBuffer, {1, 3, static_cast<long long>(size.height), static_cast<long long>(size.width)}, at::kFloat);
+        tensor = tensor.to(torch::kCPU);
+        
+        // Disable gradient computation for inference
+        torch::autograd::AutoGradMode guard(false);
+        at::AutoNonVariableTypeMode non_var_type_mode(true);
+        
+        // Run model inference
+        auto outputTensor = _impl.forward({tensor}).toTensor();
+        
+        // Get the predicted score (already in 0-1 range)
+        float score = outputTensor.item<float>();
+        
+        // Convert to 0-100 range for display
+        return score * 100.0f;
+        
+    } catch (const std::exception& exception) {
+        NSLog(@"%s", exception.what());
+    }
+    return 0;
+}
+
+@end
+
 @implementation NLPTorchModule
 
 - (NSArray<NSNumber*>*)predictText:(NSString*)text {

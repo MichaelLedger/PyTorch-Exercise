@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,10 @@
 		6775002D29F7DB360002FD7E /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775002B29F7DB360002FD7E /* UIKitExtension.swift */; };
 		678D0A0C2A5B98FE005A506A /* IQA_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67E9171C2A077E0300494648 /* IQA_mobile_model.ptl */; };
 		678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */; };
+		67938F7B2E66DCCE007F43FF /* TeacherModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */; };
+		67938FB82E66DCCE007F43FF /* TeacherModelPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */; };
+		6793A82D2E66DCCE007F43FF /* teacher_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67938F4F2E66DCCC007F43FF /* teacher_model.ptl */; };
+		6793B3AF2E66DCCE007F43FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67938F502E66DCCC007F43FF /* Main.storyboard */; };
 		679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679958F429F8B34400BB7010 /* MUSIQPredictor.swift */; };
 		A01F52AC233C6C32004039FC /* topics.txt in Resources */ = {isa = PBXBuildFile; fileRef = A01F52AB233C6C32004039FC /* topics.txt */; };
 		A01F52AE233C985C004039FC /* Predictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01F52AD233C985C004039FC /* Predictor.swift */; };
@@ -39,7 +43,6 @@
 		A06D4CCD2330AAA200763E16 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06D4CCC2330AAA200763E16 /* CameraController.swift */; };
 		A091B19723303F2D0008A5B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091B19623303F2D0008A5B8 /* AppDelegate.swift */; };
 		A091B19923303F2D0008A5B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091B19823303F2D0008A5B8 /* ViewController.swift */; };
-		A091B19C23303F2D0008A5B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A091B19A23303F2D0008A5B8 /* Main.storyboard */; };
 		A091B19E23303F2D0008A5B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A091B19D23303F2D0008A5B8 /* Assets.xcassets */; };
 		A091B1A123303F2D0008A5B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A091B19F23303F2D0008A5B8 /* LaunchScreen.storyboard */; };
 		A091B75E2330789A0008A5B8 /* ImageClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091B75D2330789A0008A5B8 /* ImageClassificationViewController.swift */; };
@@ -63,6 +66,12 @@
 		6775001829F7DA240002FD7E /* MUSIQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUSIQViewController.swift; sourceTree = "<group>"; };
 		6775002A29F7DB360002FD7E /* TFLiteExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFLiteExtension.swift; sourceTree = "<group>"; };
 		6775002B29F7DB360002FD7E /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		67938F4C2E66DCCC007F43FF /* convert_model.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = convert_model.py; sourceTree = "<group>"; };
+		67938F4D2E66DCCC007F43FF /* log.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log.png; sourceTree = "<group>"; };
+		67938F4F2E66DCCC007F43FF /* teacher_model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; path = teacher_model.ptl; sourceTree = "<group>"; };
+		67938F502E66DCCC007F43FF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherModelPredictor.swift; sourceTree = "<group>"; };
+		67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherModelViewController.swift; sourceTree = "<group>"; };
 		679958F429F8B34400BB7010 /* MUSIQPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSIQPredictor.swift; sourceTree = "<group>"; };
 		67A828AF2A088B1100F2F576 /* IQA_script_module.pt */ = {isa = PBXFileReference; lastKnownFileType = file; name = IQA_script_module.pt; path = "../../../MUSIQ-Pytorch/IQA_script_module.pt"; sourceTree = "<group>"; };
 		67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; name = resnet50_mobile_model.ptl; path = "../../../MUSIQ-Pytorch/resnet50_mobile_model.ptl"; sourceTree = "<group>"; };
@@ -148,6 +157,19 @@
 			path = MUSIQ;
 			sourceTree = "<group>";
 		};
+		67938F532E66DCCC007F43FF /* TeacherModel */ = {
+			isa = PBXGroup;
+			children = (
+				67938F4C2E66DCCC007F43FF /* convert_model.py */,
+				67938F4D2E66DCCC007F43FF /* log.png */,
+				67938F4F2E66DCCC007F43FF /* teacher_model.ptl */,
+				67938F502E66DCCC007F43FF /* Main.storyboard */,
+				67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */,
+				67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */,
+			);
+			path = TeacherModel;
+			sourceTree = "<group>";
+		};
 		A0296C482333176500C77366 /* NLP */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +235,7 @@
 		A091B19523303F2D0008A5B8 /* PyTorchDemo */ = {
 			isa = PBXGroup;
 			children = (
+				67938F532E66DCCC007F43FF /* TeacherModel */,
 				6775001729F7DA240002FD7E /* MUSIQ */,
 				A03349B4233D2F8F003425FD /* view */,
 				A01F52AD233C985C004039FC /* Predictor.swift */,
@@ -347,6 +370,8 @@
 			files = (
 				A065C92B2335711B006BEAAD /* words.txt in Resources */,
 				A036EA30233B1C0B00054A36 /* NLPModelCard.xib in Resources */,
+				6793A82D2E66DCCE007F43FF /* teacher_model.ptl in Resources */,
+				6793B3AF2E66DCCE007F43FF /* Main.storyboard in Resources */,
 				A03349C0233D6A7E003425FD /* ImageClassificationResultView.xib in Resources */,
 				678D0A0D2A5B9901005A506A /* resnet50_mobile_model.ptl in Resources */,
 				A091B1A123303F2D0008A5B8 /* LaunchScreen.storyboard in Resources */,
@@ -358,7 +383,6 @@
 				A036EA33233C19F500054A36 /* reddit.pt in Resources */,
 				B1C35BA725C99B5200CAB118 /* trace_model.py in Resources */,
 				A03349CE233DB128003425FD /* NLPItemView.xib in Resources */,
-				A091B19C23303F2D0008A5B8 /* Main.storyboard in Resources */,
 				A01F52AC233C6C32004039FC /* topics.txt in Resources */,
 				A03349BC233D5E7C003425FD /* mobilenet_quantized.pt in Resources */,
 				A09E1796233990A0002F8F15 /* VisionModelCard.xib in Resources */,
@@ -398,9 +422,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PyTorchDemo/Pods-PyTorchDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PyTorchDemo/Pods-PyTorchDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -428,6 +456,8 @@
 				679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */,
 				A03349B8233D2F8F003425FD /* UIColor+Helper.swift in Sources */,
 				A09E179423398CC9002F8F15 /* VisionModelCard.swift in Sources */,
+				67938F7B2E66DCCE007F43FF /* TeacherModelViewController.swift in Sources */,
+				67938FB82E66DCCE007F43FF /* TeacherModelPredictor.swift in Sources */,
 				A036EA2E233B1BFE00054A36 /* NLPModelCard.swift in Sources */,
 				A06D4CCD2330AAA200763E16 /* CameraController.swift in Sources */,
 				6775002D29F7DB360002FD7E /* UIKitExtension.swift in Sources */,
@@ -600,6 +630,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/torchvision/.dylibs",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/PIL/.dylibs",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/torch/lib",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/random/lib",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/_core/lib",
+				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
 				PRODUCT_NAME = ScoreImage;
@@ -628,6 +666,14 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/torchvision/.dylibs",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/PIL/.dylibs",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/torch/lib",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/random/lib",
+					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/_core/lib",
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
