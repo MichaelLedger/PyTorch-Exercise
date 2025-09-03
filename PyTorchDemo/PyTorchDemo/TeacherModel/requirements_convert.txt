@@ -4,3 +4,4 @@ numpy>=1.19.2
 coremltools>=6.0
 timm>=0.6.0
 einops>=0.3.0
+pillow>=8.0.0

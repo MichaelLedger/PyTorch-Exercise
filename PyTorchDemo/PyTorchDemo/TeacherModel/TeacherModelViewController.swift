@@ -11,7 +11,7 @@ class TeacherModelViewController: UIViewController {
     
     // MARK: - Properties
     private lazy var torchPredictor = TeacherModelPredictor()
-    private lazy var coreMLPredictor = TeacherModelCoreMLPredictor()
+    private lazy var coreMLPredictor = StudentModelCoreMLPredictor() //TeacherModelCoreMLPredictor()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

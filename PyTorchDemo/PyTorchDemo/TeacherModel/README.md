@@ -29,6 +29,8 @@ TBU
 5. [Results](#Results)
 6. [Citation](#Citation)
 7. [Acknowledgement](#Acknowledgement)
+8. [Core ML Conversion Guide](#CoreML)
+9. [Student Model Conversion](#StudentModel)
 
 
 ## Introduction
@@ -138,3 +140,115 @@ Load Model:  mobileIQA
 Image Name    image quality score
 Image: 826373.jpg, Score: 0.7045
 ```
+
+## Student Model Conversion
+<div id="StudentModel"></div>
+
+### Prerequisites and Setup
+- Python 3.9+ (recommended for Core ML tools)
+- Create virtual environment and install dependencies:
+```bash
+python3.9 -m venv venv_py39
+source venv_py39/bin/activate
+pip install -r requirements_convert.txt
+```
+
+requirements_convert.txt:
+```
+torch>=1.9.0
+torchvision>=0.10.0
+numpy>=1.19.2
+coremltools>=6.0
+timm>=0.6.0
+einops>=0.3.0
+pillow>=8.0.0
+```
+
+*Tips: tape `deactivate` to exit a python virtual environment.*
+
+### Conversion Process
+1. **Create Conversion Script** (`convert_student_model.py`):
+```python
+import torch
+import coremltools as ct
+from models.MobileNet_IQA import MoNet
+
+def convert_student_model_to_coreml():
+    # Create and configure model
+    model = MoNet(drop=0.1, dim_mlp=768, img_size=224)
+    model.eval()
+    
+    # Load weights
+    checkpoint = torch.load('student_model.pkl', map_location='cpu')
+    if isinstance(checkpoint, dict):
+        model.load_state_dict(checkpoint['model_state_dict'])
+    else:
+        model.load_state_dict(checkpoint)
+    
+    # Create example input
+    example_input = torch.randn(1, 3, 224, 224)
+    traced_model = torch.jit.trace(model, example_input)
+    
+    # Convert to Core ML
+    coreml_model = ct.convert(
+        traced_model,
+        inputs=[ct.TensorType(name="input_image", shape=example_input.shape)],
+        compute_units=ct.ComputeUnit.ALL,
+        minimum_deployment_target=ct.target.iOS16,
+        convert_to="mlprogram"
+    )
+    
+    # Save model
+    coreml_model.save("StudentModel.mlpackage")
+
+if __name__ == "__main__":
+    convert_student_model_to_coreml()
+```
+
+2. **Run Conversion**:
+```bash
+python3 convert_student_model.py
+```
+
+### iOS Integration
+Create `StudentModelCoreMLPredictor.swift`:
+```swift
+class StudentModelCoreMLPredictor {
+    private lazy var model: StudentModel = {
+        let config = MLModelConfiguration()
+        config.computeUnits = .all
+        guard let model = try? StudentModel(configuration: config) else {
+            fatalError("Failed to load the StudentModel Core ML model.")
+        }
+        return model
+    }()
+    
+    func predict(_ image: UIImage) throws -> (score: Float, inferenceTime: Double) {
+        // Preprocess image
+        // Run inference
+        // Return score and timing
+    }
+}
+```
+
+### Key Differences from Teacher Model
+1. **Model Architecture**:
+   - Uses MobileNet instead of MobileViT
+   - Lighter weight and faster inference
+   - Optimized for mobile devices
+
+2. **Input Processing**:
+   - Same input size (224x224)
+   - Same normalization parameters
+   - Optimized memory usage
+
+3. **Performance**:
+   - Faster inference time
+   - Lower memory footprint
+   - Suitable for real-time processing
+
+### Notes
+- Model expects 224x224 RGB images
+- Input normalization: mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+- Output is a quality score between 0 and 1
+- Core ML version typically shows better performance than PyTorch on iOS devices

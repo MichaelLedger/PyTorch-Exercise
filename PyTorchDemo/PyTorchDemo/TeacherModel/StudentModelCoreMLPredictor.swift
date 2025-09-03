@@ -1,22 +1,22 @@
 import UIKit
 import CoreML
 
-/// A predictor that uses the Core ML version of the TeacherModel
-class TeacherModelCoreMLPredictor {
+/// A predictor that uses the Core ML version of the Student Model (MobileNet)
+class StudentModelCoreMLPredictor {
     private var isRunning: Bool = false
     
     /// The Core ML model instance
-    private lazy var model: TeacherModel = {
+    private lazy var model: StudentModel = {
         let config = MLModelConfiguration()
         config.computeUnits = .all // Use all available compute units (CPU, GPU, Neural Engine)
         
-        guard let model = try? TeacherModel(configuration: config) else {
-            fatalError("Failed to load the TeacherModel Core ML model.")
+        guard let model = try? StudentModel(configuration: config) else {
+            fatalError("Failed to load the StudentModel Core ML model.")
         }
         return model
     }()
     
-    /// Error types specific to TeacherModelCoreMLPredictor
+    /// Error types specific to StudentModelCoreMLPredictor
     enum PredictionError: Error {
         case preprocessingFailed
         case predictionFailed
@@ -32,6 +32,12 @@ class TeacherModelCoreMLPredictor {
                 return "Prediction is already in progress"
             }
         }
+    }
+    
+    /// Constants for the Student Model
+    private enum Constants {
+        static let inputWidth = 224
+        static let inputHeight = 224
     }
     
     /// Predicts image quality score for the given image
@@ -63,8 +69,8 @@ class TeacherModelCoreMLPredictor {
         
         // Create MLMultiArray from normalized buffer
         guard let inputArray = try? MLMultiArray(shape: [1, 3, 
-                                                       NSNumber(value: TeacherModelCoreMLConstants.inputHeight),
-                                                       NSNumber(value: TeacherModelCoreMLConstants.inputWidth)],
+                                                       NSNumber(value: Constants.inputHeight),
+                                                       NSNumber(value: Constants.inputWidth)],
                                                dataType: .float32) else {
             throw PredictionError.preprocessingFailed
         }
@@ -78,7 +84,7 @@ class TeacherModelCoreMLPredictor {
         // Run prediction using the generated model class
         do {
             let output = try model.prediction(input_image: inputArray)
-            let score = output.var_2945[0].floatValue
+            let score = output.var_2773[0].floatValue
             let inferenceTime = CACurrentMediaTime() - startTime
             return (score: score, inferenceTime: inferenceTime)
         } catch {
@@ -117,9 +123,9 @@ class TeacherModelCoreMLPredictor {
 }
 
 // MARK: - Usage Example
-extension TeacherModelCoreMLPredictor {
+extension StudentModelCoreMLPredictor {
     static func example() {
-        let predictor = TeacherModelCoreMLPredictor()
+        let predictor = StudentModelCoreMLPredictor()
         
         // Synchronous usage
         if let image = UIImage(named: "sample_image") {
@@ -141,6 +147,12 @@ extension TeacherModelCoreMLPredictor {
                     print("Prediction failed: \(error.localizedDescription)")
                 }
             }
+        }
+        
+        // Debug preprocessing
+        if let image = UIImage(named: "sample_image"),
+           let debugImage = predictor.debugPreprocessing(image) {
+            print("Debug image size: \(debugImage.size)")
         }
     }
 }

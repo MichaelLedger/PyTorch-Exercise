@@ -18,9 +18,9 @@
 		6793B3AF2E66DCCE007F43FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67938F502E66DCCC007F43FF /* Main.storyboard */; };
 		6793C0872E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793C0862E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift */; };
 		6793C08B2E67EBE5007F43FF /* CVPixelBuffer+TeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793C0892E67EBE5007F43FF /* CVPixelBuffer+TeacherModel.swift */; };
-		6793C08C2E67EBE5007F43FF /* TeacherModel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 6793C08A2E67EBE5007F43FF /* TeacherModel.mlpackage */; };
 		6793C08D2E67EBE5007F43FF /* convert_teacher_model.py in Resources */ = {isa = PBXBuildFile; fileRef = 6793C0882E67EBE5007F43FF /* convert_teacher_model.py */; };
-		6793C08F2E67EC20007F43FF /* TeacherModelCoreMLPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793C08E2E67EC20007F43FF /* TeacherModelCoreMLPredictor.swift */; };
+		6793C0912E681D20007F43FF /* StudentModel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 6793C0902E681D20007F43FF /* StudentModel.mlpackage */; };
+		6793C0932E681DDE007F43FF /* StudentModelCoreMLPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793C0922E681DDE007F43FF /* StudentModelCoreMLPredictor.swift */; };
 		679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679958F429F8B34400BB7010 /* MUSIQPredictor.swift */; };
 		A01F52AC233C6C32004039FC /* topics.txt in Resources */ = {isa = PBXBuildFile; fileRef = A01F52AB233C6C32004039FC /* topics.txt */; };
 		A01F52AE233C985C004039FC /* Predictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01F52AD233C985C004039FC /* Predictor.swift */; };
@@ -78,6 +78,8 @@
 		6793C0892E67EBE5007F43FF /* CVPixelBuffer+TeacherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+TeacherModel.swift"; sourceTree = "<group>"; };
 		6793C08A2E67EBE5007F43FF /* TeacherModel.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = TeacherModel.mlpackage; sourceTree = "<group>"; };
 		6793C08E2E67EC20007F43FF /* TeacherModelCoreMLPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherModelCoreMLPredictor.swift; sourceTree = "<group>"; };
+		6793C0902E681D20007F43FF /* StudentModel.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = StudentModel.mlpackage; sourceTree = "<group>"; };
+		6793C0922E681DDE007F43FF /* StudentModelCoreMLPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModelCoreMLPredictor.swift; sourceTree = "<group>"; };
 		679958F429F8B34400BB7010 /* MUSIQPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSIQPredictor.swift; sourceTree = "<group>"; };
 		67A828AF2A088B1100F2F576 /* IQA_script_module.pt */ = {isa = PBXFileReference; lastKnownFileType = file; name = IQA_script_module.pt; path = "../../../MUSIQ-Pytorch/IQA_script_module.pt"; sourceTree = "<group>"; };
 		67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; name = resnet50_mobile_model.ptl; path = "../../../MUSIQ-Pytorch/resnet50_mobile_model.ptl"; sourceTree = "<group>"; };
@@ -166,10 +168,12 @@
 		67938F532E66DCCC007F43FF /* TeacherModel */ = {
 			isa = PBXGroup;
 			children = (
+				6793C0902E681D20007F43FF /* StudentModel.mlpackage */,
+				6793C0922E681DDE007F43FF /* StudentModelCoreMLPredictor.swift */,
+				6793C08A2E67EBE5007F43FF /* TeacherModel.mlpackage */,
 				6793C08E2E67EC20007F43FF /* TeacherModelCoreMLPredictor.swift */,
 				6793C0882E67EBE5007F43FF /* convert_teacher_model.py */,
 				6793C0892E67EBE5007F43FF /* CVPixelBuffer+TeacherModel.swift */,
-				6793C08A2E67EBE5007F43FF /* TeacherModel.mlpackage */,
 				6793C0862E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift */,
 				67938F4C2E66DCCC007F43FF /* convert_model.py */,
 				67938F4D2E66DCCC007F43FF /* log.png */,
@@ -451,10 +455,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A03349BA233D37D4003425FD /* UIViewController+Helper.swift in Sources */,
+				6793C0912E681D20007F43FF /* StudentModel.mlpackage in Sources */,
 				A091B75E2330789A0008A5B8 /* ImageClassificationViewController.swift in Sources */,
 				A036EA2B233B167A00054A36 /* NLPPredictor.swift in Sources */,
 				A03349C8233DAE8F003425FD /* NLPResultView.swift in Sources */,
 				A03349C2233D71E0003425FD /* ImageClassificationItemView.swift in Sources */,
+				6793C0932E681DDE007F43FF /* StudentModelCoreMLPredictor.swift in Sources */,
 				A091B19923303F2D0008A5B8 /* ViewController.swift in Sources */,
 				A03349CC233DB0B0003425FD /* NLPItemView.swift in Sources */,
 				A091B76223315D1A0008A5B8 /* CameraPreviewView.swift in Sources */,
@@ -462,7 +468,6 @@
 				676CA7F32A2ACA2F003D67BF /* UIApplication+Helper.swift in Sources */,
 				A01F52AE233C985C004039FC /* Predictor.swift in Sources */,
 				6793C08B2E67EBE5007F43FF /* CVPixelBuffer+TeacherModel.swift in Sources */,
-				6793C08C2E67EBE5007F43FF /* TeacherModel.mlpackage in Sources */,
 				679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */,
 				A03349B8233D2F8F003425FD /* UIColor+Helper.swift in Sources */,
 				A09E179423398CC9002F8F15 /* VisionModelCard.swift in Sources */,
@@ -480,7 +485,6 @@
 				6775002C29F7DB360002FD7E /* TFLiteExtension.swift in Sources */,
 				6775001929F7DA240002FD7E /* MUSIQViewController.swift in Sources */,
 				A03349BE233D69A6003425FD /* ImageClassificationResultView.swift in Sources */,
-				6793C08F2E67EC20007F43FF /* TeacherModelCoreMLPredictor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,7 +640,7 @@
 				DEVELOPMENT_TEAM = VCZ4PA8KG3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PyTorchDemo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ScoreImage;
+				INFOPLIST_KEY_CFBundleDisplayName = BestPhoto;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,7 +655,7 @@
 					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/_core/lib",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.easytiles.ww;
 				PRODUCT_NAME = ScoreImage;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PyTorchDemo/TorchBridge/PyTorchDemo-Bridging-Header.h";
@@ -673,7 +677,7 @@
 				DEVELOPMENT_TEAM = VCZ4PA8KG3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PyTorchDemo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ScoreImage;
+				INFOPLIST_KEY_CFBundleDisplayName = BestPhoto;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,7 +692,7 @@
 					"$(PROJECT_DIR)/PyTorchDemo/TeacherModel/venv/lib/python3.13/site-packages/numpy/_core/lib",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.liveBannerOcV2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planetart.easytiles.ww;
 				PRODUCT_NAME = ScoreImage;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PyTorchDemo/TorchBridge/PyTorchDemo-Bridging-Header.h";
