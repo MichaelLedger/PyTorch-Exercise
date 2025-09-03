@@ -55,11 +55,27 @@ class TeacherModelPredictor: Predictor {
 public enum TeacherModelConstants {
     // MobileIQA model settings
     static let modelType: String = "mobileIQA"
-    // Reduced size while maintaining aspect ratio (1907:1231 ≈ 1.55)
-    static let inputImageWidth: Int = 636  // 1907/3 for memory efficiency
-    static let inputImageHeight: Int = 410  // 1231/3 for memory efficiency
+    // Progressive loading sizes
+    static let targetImageWidth: Int = 1907  // Target size from test.py
+    static let targetImageHeight: Int = 1231  // Target size from test.py
+    
+    // Initial smaller size for fast preview
+    static let inputImageWidth: Int = 636   // targetImageWidth/3
+    static let inputImageHeight: Int = 410   // targetImageHeight/3
+    
+    // Memory optimization
+    static let batchSize: Int = 1024 * 1024  // Process 1M pixels at a time
     
     // Normalization parameters for MobileIQA
     static let normalizationMean: [Float] = [0.485, 0.456, 0.406]
     static let normalizationStd: [Float] = [0.229, 0.224, 0.225]
+    
+    // Image resampling method
+    enum ResamplingMethod {
+        case nearest    // Nearest neighbor, fastest but lowest quality
+        case bilinear  // Bilinear interpolation, good balance
+        case highQuality // High quality resampling
+        case lanczos    // Lanczos-like with edge handling
+    }
+    static let resamplingMethod: ResamplingMethod = .highQuality  // Try bilinear interpolation
 }

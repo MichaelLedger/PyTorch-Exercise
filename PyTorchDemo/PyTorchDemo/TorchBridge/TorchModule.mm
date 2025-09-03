@@ -368,7 +368,9 @@
                 }
             } else {
                 // Single score case - clamp output to 0-1 range
-                float score = std::min(std::max(outputTensor.item<float>(), 0.0f), 1.0f);
+                float rawScore = outputTensor.item<float>();
+                float score = std::min(std::max(rawScore, 0.0f), 1.0f);
+                NSLog(@"Raw model output: %f, Clamped score: %f", rawScore, score);
                 [results addObject:@[@"image", @(score)]];
             }
             
