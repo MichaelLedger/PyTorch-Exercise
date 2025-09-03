@@ -63,11 +63,9 @@ class MAL(nn.Module):
         self.in_dim = in_dim
 
     def forward(self, features):
-        device = features[0].device if len(features) > 0 else torch.device('cpu')
-        feature = torch.tensor([]).to(device)
-        for index, _ in enumerate(features):
-            feature = torch.cat((feature, self.attention_module[index](features[index]).unsqueeze(0)), dim=0)
-        features = feature
+        device = features[0].device
+        feature_list = [self.attention_module[i](feat).unsqueeze(0) for i, feat in enumerate(features)]
+        features = torch.cat(feature_list, dim=0)
         input_tensor = rearrange(features, 'n b c w h -> b (n c) (w h)')
         bs, _, _ = input_tensor.shape
         in_feature = rearrange(input_tensor, 'b (w c) h -> b w (c h)', w=self.in_dim, c=self.feature_num)
@@ -125,8 +123,7 @@ class MobileIQA(nn.Module):
             nn.Linear(128, 128 // 2),
             nn.ReLU(),
             nn.Dropout(drop),
-            nn.Linear(128 // 2, 1),
-            nn.Sigmoid()
+            nn.Linear(128 // 2, 1)
         )
         self.input_size = 22
 
@@ -143,9 +140,8 @@ class MobileIQA(nn.Module):
         x = x.permute(1, 0, 2, 3, 4)
 
         device = x.device
-        DOF = torch.tensor([]).to(device)
-        for index, _ in enumerate(self.MALs):
-            DOF = torch.cat((DOF, self.MALs[index](x).unsqueeze(0)), dim=0)
+        dof_list = [mal(x).unsqueeze(0) for mal in self.MALs]
+        DOF = torch.cat(dof_list, dim=0)
         DOF = rearrange(DOF, 'n c d (w h) -> n c d w h', w=self.input_size, h=self.input_size)
 
         fusion_mal = self.fusion_mal(DOF).permute(0, 2, 1)
@@ -161,8 +157,8 @@ def convert_to_torchscript():
     # Load the model state dictionary
     state_dict = torch.load('teacher_model.pkl', map_location=torch.device('cpu'))
     
-    # Create model with mobile architecture
-    model = MobileIQA()
+    # Create model with mobile architecture matching test.py configuration
+    model = MobileIQA(drop=0.1, dim_mlp=768)  # Match test.py configuration
     
     # Map the state dict keys
     mapped_state_dict = {}
@@ -182,14 +178,16 @@ def convert_to_torchscript():
             mapped_state_dict[key] = value
         elif key.startswith('fc_score.'):
             mapped_state_dict[key] = value
+
+    print(f"Mapped state dict: {mapped_state_dict}")
     
     # Load the state dict
     model.load_state_dict(state_dict, strict=False)
     model.eval()
     
     print("Creating example inputs...")
-    # Create example input matching the size from the log
-    example_input = torch.randn(1, 3, 1188, 1914)  # Size from the log
+    # Create example input with reduced size for memory efficiency
+    example_input = torch.randn(1, 3, 410, 636)  # Height=410, Width=636 to match TeacherModelPredictor.swift
     
     print("Converting to TorchScript...")
     # Convert to TorchScript via tracing
@@ -202,6 +200,23 @@ def convert_to_torchscript():
         backend='CPU',  # Use CPU backend for iOS
         optimization_blocklist=None  # Apply all optimizations
     )
+    
+    print("Validating model consistency...")
+    # Test the model with the same input before and after optimization
+    with torch.no_grad():
+        original_output = model(example_input)
+        traced_output = traced_script_module(example_input)
+        optimized_output = traced_script_module_optimized(example_input)
+        
+        print(f"Original model output: {original_output.item():.4f}")
+        print(f"Traced model output: {traced_output.item():.4f}")
+        print(f"Optimized model output: {optimized_output.item():.4f}")
+        
+        # Check if outputs are close enough
+        assert torch.allclose(original_output, traced_output, rtol=1e-3), "Traced model output differs significantly!"
+        assert torch.allclose(traced_output, optimized_output, rtol=1e-3), "Optimized model output differs significantly!"
+    
+    print("Model validation successful!")
     
     print("Saving optimized model...")
     # Save the optimized TorchScript model with .ptl extension

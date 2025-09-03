@@ -332,8 +332,8 @@
 
 @implementation TeacherTorchModule
 
-- (float)predictImage:(void*)imageBuffer
-                 size:(CGSize)size {
+- (NSArray<NSArray<NSObject*>*>*)predictImage:(void*)imageBuffer
+                                        size:(CGSize)size {
     try {
         // Create input tensor from image buffer with pinned memory
         auto options = torch::TensorOptions()
@@ -356,21 +356,33 @@
             // Run model inference with memory optimization
             auto outputTensor = _impl.forward({tensor}).toTensor();
             
-            // Get the predicted score and immediately release tensor memory
-            float score = outputTensor.item<float>();
+            // Get the predicted scores and image names
+            NSMutableArray* results = [NSMutableArray array];
+            
+            // Handle list of tuples (image_name, score)
+            if (outputTensor.dim() == 2) {
+                for (int i = 0; i < outputTensor.size(0); i++) {
+                    NSString* imageName = [NSString stringWithFormat:@"image_%d", i];
+                    float score = std::min(std::max(outputTensor[i][1].item<float>(), 0.0f), 1.0f);
+                    [results addObject:@[imageName, @(score)]];
+                }
+            } else {
+                // Single score case - clamp output to 0-1 range
+                float score = std::min(std::max(outputTensor.item<float>(), 0.0f), 1.0f);
+                [results addObject:@[@"image", @(score)]];
+            }
             
             // Explicitly clear tensors
             tensor.reset();
             outputTensor.reset();
             
-            // Convert to 0-100 range for display
-            return score * 100.0f;
+            return results;
         }
         
     } catch (const std::exception& exception) {
         NSLog(@"%s", exception.what());
     }
-    return 0;
+    return @[];
 }
 
 @end

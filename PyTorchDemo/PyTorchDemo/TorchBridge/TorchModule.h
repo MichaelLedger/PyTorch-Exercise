@@ -33,8 +33,8 @@ NS_SWIFT_NAME(predict(image:size:scaled1:size1:scaled2:size2:));
 @end
 
 @interface TeacherTorchModule : TorchModule
-- (float)predictImage:(void*)imageBuffer
-                 size:(CGSize)size
+- (NSArray<NSArray<NSObject*>*>*)predictImage:(void*)imageBuffer
+                                        size:(CGSize)size
 NS_SWIFT_NAME(predict(image:size:));
 @end
 

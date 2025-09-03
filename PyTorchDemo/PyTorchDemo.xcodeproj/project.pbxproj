@@ -16,6 +16,7 @@
 		67938FB82E66DCCE007F43FF /* TeacherModelPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */; };
 		6793A82D2E66DCCE007F43FF /* teacher_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 67938F4F2E66DCCC007F43FF /* teacher_model.ptl */; };
 		6793B3AF2E66DCCE007F43FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67938F502E66DCCC007F43FF /* Main.storyboard */; };
+		6793C0872E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793C0862E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift */; };
 		679958F529F8B34400BB7010 /* MUSIQPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679958F429F8B34400BB7010 /* MUSIQPredictor.swift */; };
 		A01F52AC233C6C32004039FC /* topics.txt in Resources */ = {isa = PBXBuildFile; fileRef = A01F52AB233C6C32004039FC /* topics.txt */; };
 		A01F52AE233C985C004039FC /* Predictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01F52AD233C985C004039FC /* Predictor.swift */; };
@@ -68,6 +69,7 @@
 		67938F502E66DCCC007F43FF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherModelPredictor.swift; sourceTree = "<group>"; };
 		67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherModelViewController.swift; sourceTree = "<group>"; };
+		6793C0862E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+MobileIQA.swift"; sourceTree = "<group>"; };
 		679958F429F8B34400BB7010 /* MUSIQPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSIQPredictor.swift; sourceTree = "<group>"; };
 		67A828AF2A088B1100F2F576 /* IQA_script_module.pt */ = {isa = PBXFileReference; lastKnownFileType = file; name = IQA_script_module.pt; path = "../../../MUSIQ-Pytorch/IQA_script_module.pt"; sourceTree = "<group>"; };
 		67A828B02A088B1100F2F576 /* resnet50_mobile_model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; name = resnet50_mobile_model.ptl; path = "../../../MUSIQ-Pytorch/resnet50_mobile_model.ptl"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		67938F532E66DCCC007F43FF /* TeacherModel */ = {
 			isa = PBXGroup;
 			children = (
+				6793C0862E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift */,
 				67938F4C2E66DCCC007F43FF /* convert_model.py */,
 				67938F4D2E66DCCC007F43FF /* log.png */,
 				67938F4F2E66DCCC007F43FF /* teacher_model.ptl */,
@@ -449,6 +452,7 @@
 				A03349B8233D2F8F003425FD /* UIColor+Helper.swift in Sources */,
 				A09E179423398CC9002F8F15 /* VisionModelCard.swift in Sources */,
 				67938F7B2E66DCCE007F43FF /* TeacherModelViewController.swift in Sources */,
+				6793C0872E67CFCC007F43FF /* CVPixelBuffer+MobileIQA.swift in Sources */,
 				67938FB82E66DCCE007F43FF /* TeacherModelPredictor.swift in Sources */,
 				A036EA2E233B1BFE00054A36 /* NLPModelCard.swift in Sources */,
 				A06D4CCD2330AAA200763E16 /* CameraController.swift in Sources */,

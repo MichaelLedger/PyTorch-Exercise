@@ -113,9 +113,20 @@ class TeacherModelViewController: UIViewController {
         DispatchQueue.global().async {
             if let results = try? self.predictor.predict(image) {
                 DispatchQueue.main.async {
-                    self.inferenceStatusLabel.text = String(format: "Score: %.2f\nTime: %.2f seconds", results.0, results.1)
+                    let scores = results.0
+                    let inferenceTime = results.1
+                    
+                    var statusText = String(format: "Time: %.2f seconds\n", inferenceTime)
+                    var scoreText = ""
+                    
+                    for (imageName, score) in scores {
+                        statusText += String(format: "\n%@: %.2f", imageName, score)
+                        scoreText += String(format: "%@: %.2f\n", imageName, score)
+                    }
+                    
+                    self.inferenceStatusLabel.text = statusText
                     self.runButton.isEnabled = true
-                    self.scoreLabel.text = String(format: "Score: %.2f", results.0)
+                    self.scoreLabel.text = scoreText
                 }
             } else {
                 DispatchQueue.main.async {
