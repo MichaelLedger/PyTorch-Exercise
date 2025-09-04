@@ -165,7 +165,7 @@
 			path = MUSIQ;
 			sourceTree = "<group>";
 		};
-		67938F532E66DCCC007F43FF /* TeacherModel */ = {
+		67938F532E66DCCC007F43FF /* MobileQA */ = {
 			isa = PBXGroup;
 			children = (
 				6793C0902E681D20007F43FF /* StudentModel.mlpackage */,
@@ -182,7 +182,7 @@
 				67938F512E66DCCC007F43FF /* TeacherModelPredictor.swift */,
 				67938F522E66DCCC007F43FF /* TeacherModelViewController.swift */,
 			);
-			path = TeacherModel;
+			path = MobileQA;
 			sourceTree = "<group>";
 		};
 		A0296C482333176500C77366 /* NLP */ = {
@@ -250,7 +250,7 @@
 		A091B19523303F2D0008A5B8 /* PyTorchDemo */ = {
 			isa = PBXGroup;
 			children = (
-				67938F532E66DCCC007F43FF /* TeacherModel */,
+				67938F532E66DCCC007F43FF /* MobileQA */,
 				6775001729F7DA240002FD7E /* MUSIQ */,
 				A03349B4233D2F8F003425FD /* view */,
 				A01F52AD233C985C004039FC /* Predictor.swift */,

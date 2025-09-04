@@ -225,7 +225,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Models
+*.pk
 *.pkl
+*.pt
 *.ptl
+*.tf
+*.tflite
+*.mlpackage
+*.mlmodel
+
 sample-images/
 venv*/
