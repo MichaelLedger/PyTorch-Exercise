@@ -234,6 +234,6 @@ cython_debug/
 *.tflite
 *.mlpackage
 *.mlmodel
-
+*.npz
 sample-images/
-venv*/
+*venv*/
